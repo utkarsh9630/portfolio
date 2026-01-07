@@ -88,16 +88,38 @@ animateElements.forEach(el => {
 document.getElementById('downloadResume').addEventListener('click', (e) => {
     e.preventDefault();
     
-    // You'll replace this with your actual resume URL
-    // For now, it shows an alert
-    alert('Please upload your resume.pdf to the repository and update the link in script.js');
+    // Direct link to resume on GitHub
+    const resumeUrl = 'https://github.com/utkarsh9630/portfolio/raw/main/Utkarsh_Tripathi_SJSU_Resume.pdf';
+    const link = document.createElement('a');
+    link.href = resumeUrl;
+    link.download = 'Utkarsh_Tripathi_Resume.pdf';
+    link.target = '_blank'; // Opens in new tab as backup
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
     
-    // When you have your resume, uncomment this:
-    // const resumeUrl = 'resume.pdf';
-    // const link = document.createElement('a');
-    // link.href = resumeUrl;
-    // link.download = 'Utkarsh_Tripathi_Resume.pdf';
-    // link.click();
+    // Show notification
+    const notification = document.createElement('div');
+    notification.textContent = 'Resume download started!';
+    notification.style.cssText = `
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background: linear-gradient(135deg, #00f5d4, #ff006e);
+        color: #0a0a0f;
+        padding: 1rem 1.5rem;
+        border-radius: 8px;
+        font-weight: 600;
+        z-index: 10000;
+        animation: slideIn 0.3s ease;
+    `;
+    
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.style.animation = 'slideOut 0.3s ease';
+        setTimeout(() => notification.remove(), 300);
+    }, 2000);
 });
 
 // ===================================
