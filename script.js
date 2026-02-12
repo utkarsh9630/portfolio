@@ -85,23 +85,13 @@ animateElements.forEach(el => {
 // Download Resume Handler
 // ===================================
 
-document.getElementById('downloadResume').addEventListener('click', (e) => {
+document.getElementById('downloadResume').addEventListener('click', async (e) => {
     e.preventDefault();
     
-    // Direct link to resume on GitHub
-    const resumeUrl = 'https://github.com/utkarsh9630/portfolio/raw/main/Utkarsh_Tripathi_SJSU_Resume.pdf';
-    const link = document.createElement('a');
-    link.href = resumeUrl;
-    link.download = 'Utkarsh_Tripathi_Resume.pdf';
-    link.target = '_blank'; // Opens in new tab as backup
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    
-    // Show notification
-    const notification = document.createElement('div');
-    notification.textContent = 'Resume download started!';
-    notification.style.cssText = `
+    // Show loading notification
+    const loadingNotification = document.createElement('div');
+    loadingNotification.textContent = 'Preparing download...';
+    loadingNotification.style.cssText = `
         position: fixed;
         bottom: 30px;
         right: 30px;
@@ -113,13 +103,42 @@ document.getElementById('downloadResume').addEventListener('click', (e) => {
         z-index: 10000;
         animation: slideIn 0.3s ease;
     `;
+    document.body.appendChild(loadingNotification);
     
-    document.body.appendChild(notification);
-    
-    setTimeout(() => {
-        notification.style.animation = 'slideOut 0.3s ease';
-        setTimeout(() => notification.remove(), 300);
-    }, 2000);
+    try {
+        // Fetch the PDF as a blob to force download
+        const response = await fetch('https://github.com/utkarsh9630/portfolio/raw/main/Utkarsh_Tripathi_SJSU_Resume.pdf');
+        const blob = await response.blob();
+        
+        // Create object URL from blob
+        const blobUrl = window.URL.createObjectURL(blob);
+        
+        // Create temporary link and trigger download
+        const link = document.createElement('a');
+        link.href = blobUrl;
+        link.download = 'Utkarsh_Tripathi_Resume.pdf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        // Clean up blob URL
+        window.URL.revokeObjectURL(blobUrl);
+        
+        // Update notification
+        loadingNotification.textContent = 'Resume downloaded successfully!';
+        setTimeout(() => {
+            loadingNotification.style.animation = 'slideOut 0.3s ease';
+            setTimeout(() => loadingNotification.remove(), 300);
+        }, 2000);
+        
+    } catch (error) {
+        console.error('Download failed:', error);
+        loadingNotification.textContent = 'Download failed. Opening in new tab...';
+        setTimeout(() => {
+            window.open('https://github.com/utkarsh9630/portfolio/raw/main/Utkarsh_Tripathi_SJSU_Resume.pdf', '_blank');
+            loadingNotification.remove();
+        }, 1500);
+    }
 });
 
 // ===================================
