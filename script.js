@@ -2,6 +2,17 @@
 // Smooth Scroll & Navigation
 // ===================================
 
+// Mobile Navigation Toggle - Define first
+const navToggle = document.querySelector('.nav-toggle');
+const navLinks = document.querySelector('.nav-links');
+
+if (navToggle && navLinks) {
+    navToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        navToggle.classList.toggle('active');
+    });
+}
+
 // Smooth scroll for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
@@ -17,19 +28,10 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             });
             
             // Close mobile menu if open
-            navLinks.classList.remove('active');
-            navToggle.classList.remove('active');
+            if (navLinks) navLinks.classList.remove('active');
+            if (navToggle) navToggle.classList.remove('active');
         }
     });
-});
-
-// Mobile Navigation Toggle
-const navToggle = document.querySelector('.nav-toggle');
-const navLinks = document.querySelector('.nav-links');
-
-navToggle.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-    navToggle.classList.toggle('active');
 });
 
 // ===================================
@@ -85,61 +87,79 @@ animateElements.forEach(el => {
 // Download Resume Handler
 // ===================================
 
-document.getElementById('downloadResume').addEventListener('click', async (e) => {
-    e.preventDefault();
-    
-    // Show loading notification
-    const loadingNotification = document.createElement('div');
-    loadingNotification.textContent = 'Preparing download...';
-    loadingNotification.style.cssText = `
-        position: fixed;
-        bottom: 30px;
-        right: 30px;
-        background: linear-gradient(135deg, #00f5d4, #ff006e);
-        color: #0a0a0f;
-        padding: 1rem 1.5rem;
-        border-radius: 8px;
-        font-weight: 600;
-        z-index: 10000;
-        animation: slideIn 0.3s ease;
-    `;
-    document.body.appendChild(loadingNotification);
-    
-    try {
-        // Fetch the PDF as a blob to force download
-        const response = await fetch('Utkarsh_Tripathi_SJSU_Resume.pdf');
-        const blob = await response.blob();
+const downloadResumeBtn = document.getElementById('downloadResume');
+
+if (downloadResumeBtn) {
+    downloadResumeBtn.addEventListener('click', async (e) => {
+        e.preventDefault();
         
-        // Create object URL from blob
-        const blobUrl = window.URL.createObjectURL(blob);
+        // Show loading notification
+        const notification = document.createElement('div');
+        notification.textContent = 'Preparing download...';
+        notification.style.cssText = `
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #00f5d4, #ff006e);
+            color: #0a0a0f;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            z-index: 10000;
+            animation: slideIn 0.3s ease;
+        `;
+        document.body.appendChild(notification);
         
-        // Create temporary link and trigger download
-        const link = document.createElement('a');
-        link.href = blobUrl;
-        link.download = 'Utkarsh_Tripathi_Resume.pdf';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        
-        // Clean up blob URL
-        window.URL.revokeObjectURL(blobUrl);
-        
-        // Update notification
-        loadingNotification.textContent = 'Resume downloaded successfully!';
-        setTimeout(() => {
-            loadingNotification.style.animation = 'slideOut 0.3s ease';
-            setTimeout(() => loadingNotification.remove(), 300);
-        }, 2000);
-        
-    } catch (error) {
-        console.error('Download failed:', error);
-        loadingNotification.textContent = 'Download failed. Opening in new tab...';
-        setTimeout(() => {
-            window.open('Utkarsh_Tripathi_SJSU_Resume.pdf', '_blank');
-            loadingNotification.remove();
-        }, 1500);
-    }
-});
+        try {
+            // Try to fetch and download the PDF
+            // IMPORTANT: Upload Utkarsh_Tripathi_SJSU_Resume.pdf to portfolio root first
+            const resumePath = 'Utkarsh_Tripathi_SJSU_Resume.pdf';
+            const response = await fetch(resumePath);
+            
+            if (!response.ok) {
+                throw new Error('Resume not found');
+            }
+            
+            const blob = await response.blob();
+            const blobUrl = window.URL.createObjectURL(blob);
+            
+            // Create temporary link and trigger download
+            const link = document.createElement('a');
+            link.href = blobUrl;
+            link.download = 'Utkarsh_Tripathi_Resume.pdf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            // Clean up
+            window.URL.revokeObjectURL(blobUrl);
+            
+            // Success notification
+            notification.textContent = 'Resume downloaded successfully!';
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            }, 2000);
+            
+        } catch (error) {
+            console.error('Download failed:', error);
+            // Fallback: direct download link
+            notification.textContent = 'Downloading...';
+            const link = document.createElement('a');
+            link.href = 'Utkarsh_Tripathi_SJSU_Resume.pdf';
+            link.download = 'Utkarsh_Tripathi_Resume.pdf';
+            link.target = '_blank';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            }, 2000);
+        }
+    });
+}
 
 // ===================================
 // Typing Effect for Hero Title (Optional)
