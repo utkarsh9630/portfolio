@@ -135,7 +135,7 @@ document.getElementById('downloadResume').addEventListener('click', async (e) =>
         console.error('Download failed:', error);
         loadingNotification.textContent = 'Download failed. Opening in new tab...';
         setTimeout(() => {
-            window.open('https://github.com/utkarsh9630/portfolio/raw/main/Utkarsh_Tripathi_SJSU_Resume.pdf', '_blank');
+            window.open('Utkarsh_Tripathi_SJSU_Resume.pdf', '_blank');
             loadingNotification.remove();
         }, 1500);
     }
