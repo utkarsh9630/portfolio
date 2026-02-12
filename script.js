@@ -107,7 +107,7 @@ document.getElementById('downloadResume').addEventListener('click', async (e) =>
     
     try {
         // Fetch the PDF as a blob to force download
-        const response = await fetch('https://github.com/utkarsh9630/portfolio/raw/main/Utkarsh_Tripathi_SJSU_Resume.pdf');
+        const response = await fetch('Utkarsh_Tripathi_SJSU_Resume.pdf');
         const blob = await response.blob();
         
         // Create object URL from blob
