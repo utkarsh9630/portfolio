@@ -492,6 +492,18 @@ body {
     overflow: hidden;
 }
 
+.project-screenshot {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    transition: var(--transition-slow);
+}
+
+.project-card:hover .project-screenshot {
+    transform: scale(1.05);
+}
+
 .project-image-placeholder {
     width: 80px;
     height: 80px;
