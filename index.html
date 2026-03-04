@@ -12,6 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Navigation -->
     <nav class="nav">
         <div class="nav-container">
             <div class="nav-logo">UT.</div>
@@ -30,6 +31,7 @@
         </div>
     </nav>
 
+    <!-- Hero Section -->
     <section class="hero" id="about">
         <div class="hero-background">
             <div class="grid-overlay"></div>
@@ -45,21 +47,21 @@
                 </h1>
                 <p class="hero-description">
                     AI/ML Engineer specialized in end-to-end machine learning pipelines, 
-                    production deployments, and intelligent systems. Dedicated to building 
-                    scalable architectures and data-driven solutions.
+                    production deployments, and intelligent systems. From data engineering 
+                    to deployed applications with 99.8% uptime.
                 </p>
                 <div class="hero-stats">
                     <div class="stat">
-                        <div class="stat-number">5+</div>
-                        <div class="stat-label">Project Repos</div>
+                        <div class="stat-number">4+</div>
+                        <div class="stat-label">Live Projects</div>
                     </div>
                     <div class="stat">
-                        <div class="stat-number">15K+</div>
+                        <div class="stat-number">10K+</div>
                         <div class="stat-label">Lines of Code</div>
                     </div>
                     <div class="stat">
-                        <div class="stat-number">8+</div>
-                        <div class="stat-label">ML Models Built</div>
+                        <div class="stat-number">5+</div>
+                        <div class="stat-label">ML Models Deployed</div>
                     </div>
                 </div>
                 <div class="hero-cta">
@@ -74,62 +76,30 @@
         </div>
     </section>
 
+    <!-- Projects Section -->
     <section class="projects" id="projects">
         <div class="container">
             <div class="section-header">
                 <span class="section-label">Portfolio</span>
                 <h2 class="section-title">Featured Projects</h2>
                 <p class="section-description">
-                    End-to-end AI/ML applications from conception to architectural deployment
+                    End-to-end AI/ML applications from conception to production deployment
                 </p>
             </div>
 
             <div class="projects-grid">
+                <!-- Project 1: AI4Invest -->
                 <article class="project-card featured">
                     <div class="project-image">
-                        <img src="images/VerdictAI.png" alt="VerdictAI Screenshot" class="project-screenshot">
+                        <div class="project-image-placeholder">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
                         <div class="project-tags">
-                            <span class="tag">AI Agents</span>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">VerdictAI - AI-powered Fact-Checking System</h3>
-                        <p class="project-description">
-                            AI-powered fact-checking system using Chain-of-Debate architecture with multi-agent reasoning (Verifier, Skeptic, Moderator) for transparent misinformation detection. Real-time evidence retrieval, explainable AI with debate transcripts, and smart memory with 85% fuzzy matching for instant repeated-claim detection.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-badge">FastAPI</span>
-                            <span class="tech-badge">OpenAI GPT-4</span>
-                            <span class="tech-badge">You.com API</span>
-                            <span class="tech-badge">SQLite</span>
-                            <span class="tech-badge">Chain-of-Debate</span>
-                        </div>
-                        <div class="project-metrics">
-                            <div class="metric">
-                                <span class="metric-value">92%</span>
-                                <span class="metric-label">Accuracy</span>
-                            </div>
-                            <div class="metric">
-                                <span class="metric-value">8-15s</span>
-                                <span class="metric-label">Response Time</span>
-                            </div>
-                            <div class="metric">
-                                <span class="metric-value">3 Agents</span>
-                                <span class="metric-label">Multi-Agent</span>
-                            </div>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://github.com/utkarsh9630/VedictAI" target="_blank" rel="noopener" class="project-link primary">
-                                <span>View GitHub</span>
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="project-card featured">
-                    <div class="project-image">
-                        <img src="images/AI4Invest.png" alt="AI4Invest Screenshot" class="project-screenshot">
-                        <div class="project-tags">
+                            <span class="tag">Live</span>
                             <span class="tag">Full-Stack</span>
                         </div>
                     </div>
@@ -162,17 +132,30 @@
                             </div>
                         </div>
                         <div class="project-links">
-                            <a href="https://github.com/utkarsh9630/ai4invest" target="_blank" rel="noopener" class="project-link primary">
-                                <span>View GitHub</span>
+                            <a href="https://ai4invest-latest.onrender.com" target="_blank" rel="noopener" class="project-link primary">
+                                <span>Live Demo</span>
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                    <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </a>
+                            <a href="https://github.com/utkarsh9630/ai4invest" target="_blank" rel="noopener" class="project-link">
+                                <span>GitHub</span>
                             </a>
                         </div>
                     </div>
                 </article>
 
+                <!-- Project 2: Mental Stress Assessment -->
                 <article class="project-card featured">
                     <div class="project-image">
-                        <img src="images/MentalStress.png" alt="Mental Stress Assessment Screenshot" class="project-screenshot">
+                        <div class="project-image-placeholder">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                                <path d="M12 6V12L16 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
                         <div class="project-tags">
+                            <span class="tag">Live</span>
                             <span class="tag">Healthcare</span>
                         </div>
                     </div>
@@ -205,13 +188,20 @@
                             </div>
                         </div>
                         <div class="project-links">
-                            <a href="https://github.com/utkarsh9630/mental-stress-assessment" target="_blank" rel="noopener" class="project-link primary">
-                                <span>View GitHub</span>
+                            <a href="https://mental-stress-assessment-ut.onrender.com/login" target="_blank" rel="noopener" class="project-link primary">
+                                <span>Live Demo</span>
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                    <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </a>
+                            <a href="https://github.com/utkarsh9630/mental-stress-assessment" target="_blank" rel="noopener" class="project-link">
+                                <span>GitHub</span>
                             </a>
                         </div>
                     </div>
                 </article>
 
+                <!-- Project 3: Energy Demand Forecasting -->
                 <article class="project-card">
                     <div class="project-image">
                         <div class="project-image-placeholder">
@@ -258,6 +248,7 @@
                     </div>
                 </article>
 
+                <!-- Project 4: Electricity Prices Analysis -->
                 <article class="project-card">
                     <div class="project-image">
                         <div class="project-image-placeholder">
@@ -295,7 +286,7 @@
                             </div>
                         </div>
                         <div class="project-links">
-                            <a href="https://github.com/utkarsh9630/Projects/tree/main" target="_blank" rel="noopener" class="project-link primary">
+                            <a href="https://github.com/utkarsh9630/Projects/tree/main/Visualization_focused_Project" target="_blank" rel="noopener" class="project-link primary">
                                 <span>View Details</span>
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                                     <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -308,6 +299,7 @@
         </div>
     </section>
 
+    <!-- Skills Section -->
     <section class="skills" id="skills">
         <div class="container">
             <div class="section-header">
@@ -390,10 +382,49 @@
                         <span class="skill-item">A/B Testing</span>
                     </div>
                 </div>
+
+                <div class="skill-category">
+                    <div class="skill-icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="3" y="3" width="7" height="7" stroke="currentColor" stroke-width="2"/>
+                            <rect x="14" y="3" width="7" height="7" stroke="currentColor" stroke-width="2"/>
+                            <rect x="3" y="14" width="7" height="7" stroke="currentColor" stroke-width="2"/>
+                            <rect x="14" y="14" width="7" height="7" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3 class="skill-title">Data Visualization</h3>
+                    <div class="skill-list">
+                        <span class="skill-item">Power BI</span>
+                        <span class="skill-item">Tableau</span>
+                        <span class="skill-item">Matplotlib</span>
+                        <span class="skill-item">Seaborn</span>
+                        <span class="skill-item">Plotly</span>
+                        <span class="skill-item">D3.js</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="skill-icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M21 16V8C21 6.89543 20.1046 6 19 6H5C3.89543 6 3 6.89543 3 8V16C3 17.1046 3.89543 18 5 18H19C20.1046 18 21 17.1046 21 16Z" stroke="currentColor" stroke-width="2"/>
+                            <path d="M8 10H16M8 14H13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <h3 class="skill-title">Data Science</h3>
+                    <div class="skill-list">
+                        <span class="skill-item">pandas</span>
+                        <span class="skill-item">NumPy</span>
+                        <span class="skill-item">Jupyter</span>
+                        <span class="skill-item">Statistical Analysis</span>
+                        <span class="skill-item">Feature Engineering</span>
+                        <span class="skill-item">Model Evaluation</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
+    <!-- Experience Section -->
     <section class="experience" id="experience">
         <div class="container">
             <div class="section-header">
@@ -410,8 +441,8 @@
                         <p class="timeline-meta">United States • 2024 - Present</p>
                         <p class="timeline-description">
                             Advanced coursework in machine learning, deep learning, data engineering, 
-                            and AI systems. Focus on practical applications and developing end-to-end 
-                            ML solutions from scratch.
+                            and AI systems. Focus on practical applications and production deployments. 
+                            Built 4+ end-to-end ML applications with 99.8% uptime.
                         </p>
                         <div class="timeline-highlights">
                             <span>Machine Learning</span>
@@ -425,17 +456,144 @@
                 <div class="timeline-item">
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
-                        <h3 class="timeline-title">AI/ML Portfolio Development</h3>
+                        <h3 class="timeline-title">AI/ML Projects Portfolio</h3>
                         <p class="timeline-meta">2024</p>
                         <p class="timeline-description">
-                            Designed and architected production-grade ML applications. 
-                            Experience spans full-stack development, model training, and architectural 
-                            system design using Flask, PostgreSQL, scikit-learn, Airflow, and Snowflake.
+                            Designed and deployed production-grade ML applications serving real users. 
+                            Experience spans full-stack development, model training, deployment, and monitoring. 
+                            Technologies include Flask, PostgreSQL, scikit-learn, Airflow, and Snowflake.
                         </p>
                         <div class="timeline-highlights">
-                            <span>Project Architecture</span>
+                            <span>4 Live Applications</span>
                             <span>5+ ML Models</span>
                             <span>Multi-user Systems</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Data Engineering & Analytics</h3>
+                        <p class="timeline-meta">2024</p>
+                        <p class="timeline-description">
+                            Built scalable data pipelines processing thousands of records daily. Implemented 
+                            ETL workflows with Apache Airflow, transformed data with dbt, and created 
+                            interactive dashboards with Power BI for business intelligence.
+                        </p>
+                        <div class="timeline-highlights">
+                            <span>Airflow</span>
+                            <span>dbt</span>
+                            <span>Snowflake</span>
+                            <span>Power BI</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Key Achievements -->
+            <div class="achievements">
+                <h3 class="achievements-title">Key Achievements</h3>
+                <div class="achievements-grid">
+                    <div class="achievement-card">
+                        <div class="achievement-icon">🎯</div>
+                        <h4>98% Model Accuracy</h4>
+                        <p>Random Forest model for risk profiling with extensive feature engineering</p>
+                    </div>
+                    <div class="achievement-card">
+                        <div class="achievement-icon">⚡</div>
+                        <h4>Real-Time Predictions</h4>
+                        <p>Sub-second inference time on production systems serving multiple users</p>
+                    </div>
+                    <div class="achievement-card">
+                        <div class="achievement-icon">🚀</div>
+                        <h4>99.8% Uptime</h4>
+                        <p>Production deployments on Render with automated monitoring and alerts</p>
+                    </div>
+                    <div class="achievement-card">
+                        <div class="achievement-icon">📊</div>
+                        <h4>End-to-End Pipelines</h4>
+                        <p>Complete data workflows from ingestion to visualization and insights</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="contact-content">
+                <div class="contact-info">
+                    <span class="section-label">Get In Touch</span>
+                    <h2 class="section-title">Let's Build Something Amazing</h2>
+                    <p class="contact-description">
+                        I'm currently seeking opportunities in AI/ML Engineering, Data Science, 
+                        and Machine Learning Operations. Open to full-time roles, internships, 
+                        and collaborative projects.
+                    </p>
+                    
+                    <div class="contact-methods">
+                        <a href="mailto:utkarsh.tripathi@sjsu.edu" class="contact-method">
+                            <div class="contact-method-icon">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M3 8L10.89 13.26C11.5 13.67 12.5 13.67 13.11 13.26L21 8M5 19H19C20.1046 19 21 18.1046 21 17V7C21 5.89543 20.1046 5 19 5H5C3.89543 5 3 5.89543 3 7V17C3 18.1046 3.89543 19 5 19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="contact-method-label">Email</div>
+                                <div class="contact-method-value">utkarsh.tripathi@sjsu.edu </div>
+                            </div>
+                        </a>
+
+                        <a href="https://github.com/utkarsh9630" target="_blank" rel="noopener" class="contact-method">
+                            <div class="contact-method-icon">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M9 19C4 20.5 4 16.5 2 16M16 22V18.13C16.0375 17.6532 15.9731 17.1738 15.811 16.7238C15.6489 16.2738 15.3929 15.8634 15.06 15.52C18.2 15.17 21.5 13.98 21.5 8.52C21.4997 7.12383 20.9627 5.7812 20 4.77C20.4559 3.54851 20.4236 2.19835 19.91 0.999999C19.91 0.999999 18.73 0.649999 16 2.48C13.708 1.85882 11.292 1.85882 9 2.48C6.27 0.649999 5.09 0.999999 5.09 0.999999C4.57638 2.19835 4.54414 3.54851 5 4.77C4.03013 5.7887 3.49252 7.14346 3.5 8.55C3.5 13.97 6.8 15.16 9.94 15.55C9.611 15.89 9.35726 16.2954 9.19531 16.7399C9.03335 17.1844 8.96681 17.6581 9 18.13V22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="contact-method-label">GitHub</div>
+                                <div class="contact-method-value">@utkarsh9630</div>
+                            </div>
+                        </a>
+
+                        <a href="https://www.linkedin.com/in/tripathiutkarsh46/" target="_blank" rel="noopener" class="contact-method">
+                            <div class="contact-method-icon">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M16 8C17.5913 8 19.1174 8.63214 20.2426 9.75736C21.3679 10.8826 22 12.4087 22 14V21H18V14C18 13.4696 17.7893 12.9609 17.4142 12.5858C17.0391 12.2107 16.5304 12 16 12C15.4696 12 14.9609 12.2107 14.5858 12.5858C14.2107 12.9609 14 13.4696 14 14V21H10V14C10 12.4087 10.6321 10.8826 11.7574 9.75736C12.8826 8.63214 14.4087 8 16 8V8Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M6 9H2V21H6V9Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M4 6C5.10457 6 6 5.10457 6 4C6 2.89543 5.10457 2 4 2C2.89543 2 2 2.89543 2 4C2 5.10457 2.89543 6 4 6Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="contact-method-label">LinkedIn</div>
+                                <div class="contact-method-value">Utkarsh Tripathi</div>
+                            </div>
+                        </a>
+
+                        <div class="contact-method">
+                            <div class="contact-method-icon">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M21 10C21 17 12 23 12 23C12 23 3 17 3 10C3 7.61305 3.94821 5.32387 5.63604 3.63604C7.32387 1.94821 9.61305 1 12 1C14.3869 1 16.6761 1.94821 18.364 3.63604C20.0518 5.32387 21 7.61305 21 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M12 13C13.6569 13 15 11.6569 15 10C15 8.34315 13.6569 7 12 7C10.3431 7 9 8.34315 9 10C9 11.6569 10.3431 13 12 13Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="contact-method-label">Location</div>
+                                <div class="contact-method-value">San Jose, California, US</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form-container">
+                    <div class="contact-cta">
+                        <h3>Ready to collaborate?</h3>
+                        <p>Download my resume or connect on LinkedIn to discuss opportunities.</p>
+                        <div class="contact-actions">
+                            <a href="mailto:utkarsh.tripathi@sjsu.edu" class="btn btn-primary">Send Email</a>
+                            <a href="https://github.com/utkarsh9630/portfolio/blob/main/Utkarsh_Tripathi_SJSU_Resume.pdf" class="btn btn-secondary" id="downloadResume">Download Resume</a>
                         </div>
                     </div>
                 </div>
@@ -443,9 +601,26 @@
         </div>
     </section>
 
-    <section class="contact" id="contact">
+    <!-- Footer -->
+    <footer class="footer">
         <div class="container">
-             </div>
-    </section>
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="footer-logo">UT.</div>
+                    <p class="footer-tagline">Building intelligent systems, one model at a time</p>
+                </div>
+                <div class="footer-links">
+                    <a href="https://github.com/utkarsh9630" target="_blank" rel="noopener">GitHub</a>
+                    <a href="https://www.linkedin.com/in/tripathiutkarsh46/" target="_blank" rel="noopener">LinkedIn</a>
+                    <a href="mailto:utkarsh.tripathi@sjsu.edu">Email</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; Utkarsh Tripathi. Built with passion for AI/ML.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
