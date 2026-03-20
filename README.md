@@ -21,8 +21,7 @@ Data Engineer transitioning into Machine Learning Engineering with 5+ years of e
 
 ## 🚀 Featured Projects
 
-### 1. VerdictAI - Real-Time Fact-Checking System
-**Live Demo:** [https://vedictai.onrender.com/](https://vedictai.onrender.com/)  
+### 1. VerdictAI - Real-Time Fact-Checking System 
 **Repository:** [github.com/utkarsh9630/VerdictAI](https://github.com/utkarsh9630/VerdictAI)
 
 AI-powered fact-checking system using Chain-of-Debate architecture with multi-agent reasoning for transparent misinformation detection.
@@ -46,7 +45,7 @@ AI-powered fact-checking system using Chain-of-Debate architecture with multi-ag
 ---
 
 ### 2. AI4Invest - Financial Risk Profiling Platform
-**Live Demo:** [https://ai4invest-latest.onrender.com](https://ai4invest-latest.onrender.com)  
+**Live Demo:** [https://ai4invest.vercel.app/login](https://ai4invest.vercel.app/login)  
 **Repository:** [github.com/utkarsh9630/ai4invest](https://github.com/utkarsh9630/ai4invest)
 
 ML-powered financial risk assessment platform analyzing 19 factors to classify users into risk categories and provide personalized S&P 500 stock recommendations.
