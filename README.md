@@ -68,7 +68,7 @@ ML-powered financial risk assessment platform analyzing 19 factors to classify u
 ---
 
 ### 3. Mental Stress Assessment System
-**Live Demo:** [https://mental-stress-assessment-ut.onrender.com/login](https://mental-stress-assessment-ut.onrender.com/login)  
+**Live Demo:** [https://verdict-ai-jade.vercel.app/](https://verdict-ai-jade.vercel.app/)  
 **Repository:** [github.com/utkarsh9630/mental-stress-assessment](https://github.com/utkarsh9630/mental-stress-assessment)
 
 AI-powered web application predicting student mental stress levels with personalized coping mechanism recommendations using k-NN collaborative filtering.
