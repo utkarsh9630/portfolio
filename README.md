@@ -284,12 +284,6 @@ Currently seeking full-time positions in:
 
 ---
 
-## 📄 Resume
-
-Download my resume: [Utkarsh_Tripathi_SJSU_Resume.pdf](https://github.com/utkarsh9630/portfolio/raw/main/Utkarsh_Tripathi_SJSU_Resume.pdf)
-
----
-
 ## ⭐ Portfolio Website
 
 This portfolio is built with:
