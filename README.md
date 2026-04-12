@@ -224,13 +224,6 @@ Bharati Vidyapeeth Deemed University, India | July 2014 - June 2018
 
 ---
 
-## 🎓 Certifications
-
-- AWS Certified Cloud Practitioner (In Progress)
-- Digital Marketing Training
-
----
-
 ## 📊 Portfolio Metrics
 
 - **4+ Live Applications** deployed and serving users
