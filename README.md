@@ -62,7 +62,7 @@ M.S. Applied Data Intelligence, SJSU — Graduated 2026. 6+ years in data engine
 
 ## Contact
 
-- **Email:** [your personal email]
+- **Email:** [tripathiutkarsh46@gmail.com]
 - **LinkedIn:** [linkedin.com/in/tripathiutkarsh46](https://www.linkedin.com/in/tripathiutkarsh46/)
 - **GitHub:** [github.com/utkarsh9630](https://github.com/utkarsh9630)
 - **Location:** San Jose, California, US
