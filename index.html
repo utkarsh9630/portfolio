@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Utkarsh Tripathi - AI/ML Engineer Portfolio | Data Intelligence & Machine Learning Solutions">
-    <meta name="keywords" content="AI Engineer, Machine Learning, Data Science, Portfolio, RAG, LLM">
+    <meta name="description" content="Utkarsh Tripathi - AI/ML Engineer Portfolio | GenAI, LLM Fine-tuning, Multi-Agent Systems, RAG Pipelines">
+    <meta name="keywords" content="AI Engineer, LLM Fine-tuning, RAG, LangGraph, Multi-Agent, Generative AI, Data Engineering, Portfolio">
     <title>Utkarsh Tripathi | AI/ML Engineer</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -40,28 +40,28 @@
         </div>
         <div class="container">
             <div class="hero-content">
-                <div class="hero-badge">MS in Applied Data Intelligence</div>
+                <div class="hero-badge">M.S. Applied Data Intelligence, SJSU — Graduated 2026</div>
                 <h1 class="hero-title">
                     Building AI Systems That
                     <span class="gradient-text">Transform Data Into Decisions</span>
                 </h1>
                 <p class="hero-description">
-                    AI/ML Engineer specialized in end-to-end machine learning pipelines,
-                    production deployments, and intelligent systems. From data engineering
-                    to deployed applications with 99.8% uptime.
+                    AI/ML Engineer specialized in LLM fine-tuning, multi-agent orchestration,
+                    and production RAG pipelines. 6+ years in data engineering, now shipping
+                    GenAI systems with LangGraph, vLLM, and AWS from prototype to production.
                 </p>
                 <div class="hero-stats">
                     <div class="stat">
-                        <div class="stat-number">5+</div>
+                        <div class="stat-number">8+</div>
                         <div class="stat-label">Live Projects</div>
                     </div>
                     <div class="stat">
-                        <div class="stat-number">10K+</div>
-                        <div class="stat-label">Lines of Code</div>
+                        <div class="stat-number">🏆 1st</div>
+                        <div class="stat-label">Ship to Prod SF</div>
                     </div>
                     <div class="stat">
-                        <div class="stat-number">5+</div>
-                        <div class="stat-label">ML Models Deployed</div>
+                        <div class="stat-number">6+</div>
+                        <div class="stat-label">Years Experience</div>
                     </div>
                 </div>
                 <div class="hero-cta">
@@ -88,7 +88,8 @@
             </div>
 
             <div class="projects-grid">
-                <!-- Project 1: AI4Invest -->
+
+                <!-- Project 1: Capstone -->
                 <article class="project-card featured">
                     <div class="project-image">
                         <div class="project-image-placeholder">
@@ -96,6 +97,167 @@
                                 <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div class="project-tags">
+                            <span class="tag">Capstone</span>
+                            <span class="tag">Multi-Agent</span>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">AI-Powered Workforce Assistants</h3>
+                        <p class="project-description">
+                            3-agent autonomous system (Slack-to-Jira, Email-to-Calendar, Meeting Summarizer)
+                            under a LangGraph orchestrator. Shared Qwen2.5-14B base with QLoRA adapters
+                            swapped at inference via vLLM on AWS EC2. RLHF feedback loop drives weekly
+                            LoRA adapter retraining. Human approves every consequential step.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-badge">LangGraph</span>
+                            <span class="tech-badge">QLoRA</span>
+                            <span class="tech-badge">vLLM</span>
+                            <span class="tech-badge">AWS EC2</span>
+                            <span class="tech-badge">GitHub Actions</span>
+                        </div>
+                        <div class="project-metrics">
+                            <div class="metric">
+                                <span class="metric-value">0.94</span>
+                                <span class="metric-label">ROUGE-1</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-value">94%</span>
+                                <span class="metric-label">JSON Validity</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-value">88.38%</span>
+                                <span class="metric-label">Email F1</span>
+                            </div>
+                        </div>
+                        <div class="project-links">
+                            <!-- ADD YOUR CAPSTONE GITHUB LINK BELOW -->
+                            <a href="https://github.com/aishanee-sinha/Multi-Agent-Autonomous-Workforce-Assistant" target="_blank" rel="noopener" class="project-link">
+                                <span>GitHub</span>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 2: Pipeline Copilot -->
+                <article class="project-card featured">
+                    <div class="project-image">
+                        <div class="project-image-placeholder">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div class="project-tags">
+                            <span class="tag">🏆 1st Place</span>
+                            <span class="tag">Hackathon</span>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Pipeline Copilot — AI-Powered ETL</h3>
+                        <p class="project-description">
+                            Won first place at Ship to Prod Hackathon, San Francisco. Plain English description
+                            to full three-layer dbt pipeline — extraction SQL, staging, mart models with schema
+                            tests — validated against real PostgreSQL database. Live streaming via SSE.
+                            The AI does the boilerplate, human reviews and approves before deploy.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-badge">GPT-4o</span>
+                            <span class="tech-badge">LangGraph</span>
+                            <span class="tech-badge">dbt</span>
+                            <span class="tech-badge">PostgreSQL</span>
+                            <span class="tech-badge">React + Vite</span>
+                        </div>
+                        <div class="project-metrics">
+                            <div class="metric">
+                                <span class="metric-value">🏆</span>
+                                <span class="metric-label">First Place</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-value">3-Layer</span>
+                                <span class="metric-label">dbt Pipeline</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-value">Live</span>
+                                <span class="metric-label">SSE Streaming</span>
+                            </div>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://devpost.com/software/ai-for-etl" target="_blank" rel="noopener" class="project-link primary">
+                                <span>Devpost</span>
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                    <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </a>
+                            <!-- ADD YOUR PIPELINE COPILOT GITHUB LINK BELOW -->
+                            <a href="https://github.com/utkarsh9630/PipelineCopilot_public" target="_blank" rel="noopener" class="project-link">
+                                <span>GitHub</span>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 3: PermitLens -->
+                <article class="project-card featured">
+                    <div class="project-image">
+                        <div class="project-image-placeholder">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9 12L11 14L15 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <div class="project-tags">
+                            <span class="tag">RAG</span>
+                            <span class="tag">IBM watsonx</span>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">PermitLens — AI-Powered Permit Guidance</h3>
+                        <p class="project-description">
+                            5-agent RAG pipeline using IBM Granite 3 8B via watsonx.ai. Live retrieval from
+                            verified city permit pages, PII scrubbing before inference, and a Guardrail agent
+                            enforcing source citation and stripping approval language. IBM watsonx.governance
+                            logs every inference call as an AI Factsheet.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-badge">IBM Granite</span>
+                            <span class="tech-badge">watsonx.ai</span>
+                            <span class="tech-badge">RAG</span>
+                            <span class="tech-badge">Next.js</span>
+                            <span class="tech-badge">Railway</span>
+                        </div>
+                        <div class="project-metrics">
+                            <div class="metric">
+                                <span class="metric-value">5</span>
+                                <span class="metric-label">AI Agents</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-value">Live</span>
+                                <span class="metric-label">City Retrieval</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-value">PII</span>
+                                <span class="metric-label">Scrubbed</span>
+                            </div>
+                        </div>
+                        <div class="project-links">
+                            <!-- ADD YOUR PERMITLENS GITHUB LINK BELOW -->
+                            <a href="https://github.com/preethisighavi/PermitLens_Public_Repo" target="_blank" rel="noopener" class="project-link">
+                                <span>GitHub</span>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 4: AI4Invest -->
+                <article class="project-card featured">
+                    <div class="project-image">
+                        <img src="images/AI4Invest.png" alt="AI4Invest Screenshot" style="width:100%;height:100%;object-fit:cover;border-radius:8px;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                        <div class="project-image-placeholder" style="display:none;">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </div>
                         <div class="project-tags">
@@ -108,14 +270,15 @@
                         <p class="project-description">
                             ML-powered financial risk assessment platform analyzing 19 factors to classify
                             users into risk categories and provide personalized S&P 500 stock recommendations.
-                            Features investment simulator with 90-day return predictions.
+                            K-means clustering on factor signals (vol30, mom30, beta60) mirrors MSCI's
+                            factor index construction logic. Features investment simulator with 90-day return predictions.
                         </p>
                         <div class="project-tech">
                             <span class="tech-badge">Flask</span>
-                            <span class="tech-badge">PostgreSQL</span>
                             <span class="tech-badge">scikit-learn</span>
                             <span class="tech-badge">Random Forest</span>
-                            <span class="tech-badge">Render</span>
+                            <span class="tech-badge">K-means</span>
+                            <span class="tech-badge">Vercel</span>
                         </div>
                         <div class="project-metrics">
                             <div class="metric">
@@ -127,8 +290,8 @@
                                 <span class="metric-label">ML Models</span>
                             </div>
                             <div class="metric">
-                                <span class="metric-value">Multi-user</span>
-                                <span class="metric-label">Auth System</span>
+                                <span class="metric-value">200+</span>
+                                <span class="metric-label">Users</span>
                             </div>
                         </div>
                         <div class="project-links">
@@ -145,13 +308,13 @@
                     </div>
                 </article>
 
-                <!-- Project 2: Mental Stress Assessment -->
+                <!-- Project 5: Mental Stress Assessment -->
                 <article class="project-card featured">
                     <div class="project-image">
-                        <div class="project-image-placeholder">
+                        <img src="images/MentalStress.png" alt="Mental Stress Assessment Screenshot" style="width:100%;height:100%;object-fit:cover;border-radius:8px;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                        <div class="project-image-placeholder" style="display:none;">
                             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
-                                <path d="M12 6V12L16 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                             </svg>
                         </div>
                         <div class="project-tags">
@@ -163,24 +326,25 @@
                         <h3 class="project-title">Mental Stress Assessment System</h3>
                         <p class="project-description">
                             AI-powered web application predicting student mental stress levels with personalized
-                            coping mechanism recommendations. Multi-profile management with k-NN based recommendation
-                            engine and assessment history tracking.
+                            coping mechanism recommendations. Random Forest on 20 psychosocial features with
+                            engineered Stress Ratio feature. KNN recommendation engine ranks coping strategies
+                            by real-world success rate among similar profiles.
                         </p>
                         <div class="project-tech">
                             <span class="tech-badge">Flask</span>
-                            <span class="tech-badge">SQLAlchemy</span>
                             <span class="tech-badge">Random Forest</span>
                             <span class="tech-badge">k-NN</span>
                             <span class="tech-badge">PostgreSQL</span>
+                            <span class="tech-badge">Vercel</span>
                         </div>
                         <div class="project-metrics">
                             <div class="metric">
-                                <span class="metric-value">20</span>
-                                <span class="metric-label">Features</span>
+                                <span class="metric-value">65%</span>
+                                <span class="metric-label">Accuracy</span>
                             </div>
                             <div class="metric">
-                                <span class="metric-value">2</span>
-                                <span class="metric-label">ML Models</span>
+                                <span class="metric-value">20</span>
+                                <span class="metric-label">Features</span>
                             </div>
                             <div class="metric">
                                 <span class="metric-value">k=50</span>
@@ -201,35 +365,32 @@
                     </div>
                 </article>
 
-                <!-- Project 3: VerdictAI -->
+                <!-- Project 6: VerdictAI -->
                 <article class="project-card featured">
                     <div class="project-image">
-                        <div class="project-image-placeholder">
+                        <img src="images/VerdictAI.png" alt="VerdictAI Screenshot" style="width:100%;height:100%;object-fit:cover;border-radius:8px;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                        <div class="project-image-placeholder" style="display:none;">
                             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M9 12L11 14L15 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2"/>
-                                <path d="M12 6V8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                                <path d="M12 16V18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                             </svg>
                         </div>
                         <div class="project-tags">
-                            <span class="tag">Live</span>
                             <span class="tag">LLM Agents</span>
+                            <span class="tag">Chain-of-Debate</span>
                         </div>
                     </div>
                     <div class="project-content">
-                        <h3 class="project-title">VerdictAI - Explainable Fact Checking (Chain-of-Debate)</h3>
-                        <h2 class="project-sub-title">
-                        Please reach out over email for getting live application access, as tokens will be generated by LLM!!!</h2>
+                        <h3 class="project-title">VerdictAI - Explainable Fact Checking</h3>
                         <p class="project-description">
-                            Multi-agent fact-checking web app that retrieves real-time evidence, runs an explainable
-                            chain-of-debate, and returns a verdict with confidence, risk level, evidence cards, and
-                            share-ready response templates. Includes memory-based deduplication for faster responses.
+                            Multi-agent fact-checking system using Chain-of-Debate architecture. Retrieves
+                            real-time supporting and refuting evidence via You.com, runs Verifier vs Skeptic
+                            debate moderated by a third agent, and returns a verdict with full reasoning
+                            transcript. SQLite memory with fuzzy matching gives 85%+ cache hit rate.
                         </p>
                         <div class="project-tech">
                             <span class="tech-badge">FastAPI</span>
-                            <span class="tech-badge">OpenAI (GPT-4o-mini)</span>
-                            <span class="tech-badge">You.com Search API</span>
+                            <span class="tech-badge">GPT-4o-mini</span>
+                            <span class="tech-badge">You.com API</span>
                             <span class="tech-badge">SQLite</span>
                             <span class="tech-badge">Render</span>
                         </div>
@@ -243,20 +404,23 @@
                                 <span class="metric-label">Cache Hits</span>
                             </div>
                             <div class="metric">
-                                <span class="metric-value">5–8</span>
-                                <span class="metric-label">Evidence Sources</span>
+                                <span class="metric-value">92%</span>
+                                <span class="metric-label">Fact-Check Align</span>
                             </div>
                         </div>
                         <div class="project-links">
-                            <a href="https://github.com/utkarsh9630/VerdictAI" target="_blank" rel="noopener" class="project-link">
+                            <a href="https://github.com/utkarsh9630/VerdictAI" target="_blank" rel="noopener" class="project-link primary">
                                 <span>GitHub</span>
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                    <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
                             </a>
                         </div>
                     </div>
                 </article>
 
-                <!-- Project 4: TicketGuard -->
-                <article class="project-card featured">
+                <!-- Project 7: TicketGuard -->
+                <article class="project-card">
                     <div class="project-image">
                         <div class="project-image-placeholder">
                             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -272,11 +436,10 @@
                     <div class="project-content">
                         <h3 class="project-title">TicketGuard - AI Ticket Scam Triage</h3>
                         <p class="project-description">
-                            Real-time scam-risk triage for ticket resale listings and seller chats, powered by
-                            NVIDIA's Nemotron model via NIM. Uses a Chain-of-Debate (CoD) multi-agent approach
-                            to return structured risk assessments — risk level, confidence score, evidence-backed
-                            reasons, copy-ready seller message templates, and containment steps if already paid.
-                            Built at NVIDIA Hackathon and deployed on Vercel.
+                            Real-time scam-risk triage for ticket resale listings powered by NVIDIA's
+                            Nemotron model via NIM. Chain-of-Debate multi-agent approach returns structured
+                            risk assessments with confidence score and evidence-backed reasoning.
+                            Built at NVIDIA Hackathon, deployed on Vercel.
                         </p>
                         <div class="project-tech">
                             <span class="tech-badge">Next.js 15</span>
@@ -286,10 +449,6 @@
                             <span class="tech-badge">Vercel</span>
                         </div>
                         <div class="project-metrics">
-                            <div class="metric">
-                                <span class="metric-value">3</span>
-                                <span class="metric-label">Risk Levels</span>
-                            </div>
                             <div class="metric">
                                 <span class="metric-value">CoD</span>
                                 <span class="metric-label">Multi-Agent</span>
@@ -306,14 +465,11 @@
                                     <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
                             </a>
-                            <a href="https://github.com/utkarsh9630" target="_blank" rel="noopener" class="project-link">
-                                <span>GitHub</span>
-                            </a>
                         </div>
                     </div>
                 </article>
 
-                <!-- Project 5: Energy Demand Forecasting -->
+                <!-- Project 8: Energy Demand Forecasting -->
                 <article class="project-card">
                     <div class="project-image">
                         <div class="project-image-placeholder">
@@ -328,9 +484,9 @@
                     <div class="project-content">
                         <h3 class="project-title">Intelligent Energy Demand Forecasting</h3>
                         <p class="project-description">
-                            End-to-end data pipeline forecasting California electricity consumption using EIA and
-                            OpenMeteo APIs. Orchestrated with Apache Airflow, transformed with dbt, and deployed
-                            on Snowflake with ML forecasting for 7-day predictions.
+                            End-to-end data pipeline forecasting California electricity consumption using
+                            EIA and OpenMeteo APIs. Orchestrated with Apache Airflow, transformed with dbt,
+                            loaded to Snowflake with ML forecasting for 7-day predictions.
                         </p>
                         <div class="project-tech">
                             <span class="tech-badge">Apache Airflow</span>
@@ -360,53 +516,6 @@
                     </div>
                 </article>
 
-                <!-- Project 6: Electricity Prices Analysis -->
-                <article class="project-card">
-                    <div class="project-image">
-                        <div class="project-image-placeholder">
-                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M3 3V21H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                                <path d="M7 16L12 11L16 15L21 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </div>
-                        <div class="project-tags">
-                            <span class="tag">Analytics</span>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">Electricity Prices & CO2 Emissions Analysis</h3>
-                        <p class="project-description">
-                            Comprehensive analysis of US electricity pricing trends and CO2 emissions (2014-2024).
-                            Built predictive models achieving R²=0.98 with Random Forest. Interactive Power BI
-                            dashboards visualizing state-wise and sector-wise patterns.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-badge">Python</span>
-                            <span class="tech-badge">pandas</span>
-                            <span class="tech-badge">scikit-learn</span>
-                            <span class="tech-badge">Power BI</span>
-                            <span class="tech-badge">EIA API</span>
-                        </div>
-                        <div class="project-metrics">
-                            <div class="metric">
-                                <span class="metric-value">0.98</span>
-                                <span class="metric-label">R² Score</span>
-                            </div>
-                            <div class="metric">
-                                <span class="metric-value">10 Years</span>
-                                <span class="metric-label">Data Coverage</span>
-                            </div>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://github.com/utkarsh9630/Projects/tree/main/Visualization_focused_Project" target="_blank" rel="noopener" class="project-link primary">
-                                <span>View Details</span>
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                    <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                </article>
             </div>
         </div>
     </section>
@@ -420,6 +529,29 @@
             </div>
 
             <div class="skills-grid">
+
+                <!-- NEW: Generative AI & LLMs -->
+                <div class="skill-category">
+                    <div class="skill-icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z" fill="currentColor"/>
+                        </svg>
+                    </div>
+                    <h3 class="skill-title">Generative AI & LLMs</h3>
+                    <div class="skill-list">
+                        <span class="skill-item">LLM Fine-tuning (QLoRA/LoRA)</span>
+                        <span class="skill-item">RAG Pipelines</span>
+                        <span class="skill-item">LangGraph</span>
+                        <span class="skill-item">LangChain</span>
+                        <span class="skill-item">vLLM</span>
+                        <span class="skill-item">Prompt Engineering</span>
+                        <span class="skill-item">Multi-Agent Systems</span>
+                        <span class="skill-item">OpenAI API</span>
+                        <span class="skill-item">IBM Granite</span>
+                        <span class="skill-item">RLHF / DPO</span>
+                    </div>
+                </div>
+
                 <div class="skill-category">
                     <div class="skill-icon">
                         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -430,13 +562,13 @@
                     <h3 class="skill-title">Machine Learning</h3>
                     <div class="skill-list">
                         <span class="skill-item">scikit-learn</span>
-                        <span class="skill-item">TensorFlow</span>
                         <span class="skill-item">PyTorch</span>
+                        <span class="skill-item">HuggingFace Transformers</span>
                         <span class="skill-item">Random Forest</span>
-                        <span class="skill-item">XGBoost</span>
-                        <span class="skill-item">Time Series</span>
-                        <span class="skill-item">Computer Vision</span>
-                        <span class="skill-item">NLP</span>
+                        <span class="skill-item">A/B Testing</span>
+                        <span class="skill-item">Statistical Analysis</span>
+                        <span class="skill-item">Feature Engineering</span>
+                        <span class="skill-item">Model Evaluation</span>
                     </div>
                 </div>
 
@@ -455,7 +587,8 @@
                         <span class="skill-item">PostgreSQL</span>
                         <span class="skill-item">Docker</span>
                         <span class="skill-item">ETL Pipelines</span>
-                        <span class="skill-item">Data Warehousing</span>
+                        <span class="skill-item">Schema Drift Monitoring</span>
+                        <span class="skill-item">Incremental Loads</span>
                     </div>
                 </div>
 
@@ -465,36 +598,33 @@
                             <path d="M4 7V17M4 7L12 3L20 7M4 7L12 11M20 7V17M20 7L12 11M12 11V21M4 17L12 21M12 21L20 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </div>
-                    <h3 class="skill-title">Full-Stack Development</h3>
+                    <h3 class="skill-title">Cloud & MLOps</h3>
                     <div class="skill-list">
-                        <span class="skill-item">Python</span>
-                        <span class="skill-item">Flask</span>
-                        <span class="skill-item">FastAPI</span>
-                        <span class="skill-item">Next.js</span>
-                        <span class="skill-item">React</span>
-                        <span class="skill-item">TypeScript</span>
-                        <span class="skill-item">JavaScript</span>
-                        <span class="skill-item">REST APIs</span>
-                        <span class="skill-item">SQLAlchemy</span>
+                        <span class="skill-item">AWS (S3, EC2, Lambda, ECR)</span>
+                        <span class="skill-item">GitHub Actions CI/CD</span>
+                        <span class="skill-item">Docker</span>
+                        <span class="skill-item">Azure DevOps</span>
+                        <span class="skill-item">Vercel</span>
+                        <span class="skill-item">Railway</span>
+                        <span class="skill-item">IBM watsonx</span>
                     </div>
                 </div>
 
                 <div class="skill-category">
                     <div class="skill-icon">
                         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M3 15V9C3 7.89543 3.89543 7 5 7H19C20.1046 7 21 7.89543 21 9V15C21 16.1046 20.1046 17 19 17H5C3.89543 17 3 16.1046 3 15Z" stroke="currentColor" stroke-width="2"/>
-                            <path d="M7 7L7 17M17 7L17 17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M4 7V17M4 7L12 3L20 7M4 7L12 11M20 7V17M20 7L12 11M12 11V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </div>
-                    <h3 class="skill-title">MLOps & Deployment</h3>
+                    <h3 class="skill-title">Backend & APIs</h3>
                     <div class="skill-list">
-                        <span class="skill-item">Vercel</span>
-                        <span class="skill-item">Render</span>
-                        <span class="skill-item">Heroku</span>
-                        <span class="skill-item">Git/GitHub</span>
-                        <span class="skill-item">CI/CD</span>
-                        <span class="skill-item">Model Monitoring</span>
-                        <span class="skill-item">A/B Testing</span>
+                        <span class="skill-item">Python</span>
+                        <span class="skill-item">FastAPI</span>
+                        <span class="skill-item">Flask</span>
+                        <span class="skill-item">REST APIs</span>
+                        <span class="skill-item">Next.js</span>
+                        <span class="skill-item">TypeScript</span>
+                        <span class="skill-item">SQL</span>
                     </div>
                 </div>
 
@@ -507,34 +637,17 @@
                             <rect x="14" y="14" width="7" height="7" stroke="currentColor" stroke-width="2"/>
                         </svg>
                     </div>
-                    <h3 class="skill-title">Data Visualization</h3>
+                    <h3 class="skill-title">Data Visualization & BI</h3>
                     <div class="skill-list">
                         <span class="skill-item">Power BI</span>
                         <span class="skill-item">Tableau</span>
+                        <span class="skill-item">QlikSense</span>
+                        <span class="skill-item">Domo</span>
                         <span class="skill-item">Matplotlib</span>
-                        <span class="skill-item">Seaborn</span>
                         <span class="skill-item">Plotly</span>
-                        <span class="skill-item">D3.js</span>
                     </div>
                 </div>
 
-                <div class="skill-category">
-                    <div class="skill-icon">
-                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M21 16V8C21 6.89543 20.1046 6 19 6H5C3.89543 6 3 6.89543 3 8V16C3 17.1046 3.89543 18 5 18H19C20.1046 18 21 17.1046 21 16Z" stroke="currentColor" stroke-width="2"/>
-                            <path d="M8 10H16M8 14H13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </div>
-                    <h3 class="skill-title">Data Science</h3>
-                    <div class="skill-list">
-                        <span class="skill-item">pandas</span>
-                        <span class="skill-item">NumPy</span>
-                        <span class="skill-item">Jupyter</span>
-                        <span class="skill-item">Statistical Analysis</span>
-                        <span class="skill-item">Feature Engineering</span>
-                        <span class="skill-item">Model Evaluation</span>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
@@ -548,22 +661,23 @@
             </div>
 
             <div class="timeline">
+
                 <div class="timeline-item">
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
-                        <div class="timeline-badge">Current</div>
-                        <h3 class="timeline-title">MS in Applied Data Intelligence</h3>
-                        <p class="timeline-meta">United States • 2024 - Present</p>
+                        <div class="timeline-badge">Graduated</div>
+                        <h3 class="timeline-title">M.S. Applied Data Intelligence</h3>
+                        <p class="timeline-meta">San Jose State University · San Jose, CA · 2024 – 2026</p>
                         <p class="timeline-description">
-                            Advanced coursework in machine learning, deep learning, data engineering,
-                            and AI systems. Focus on practical applications and production deployments.
-                            Built 5+ end-to-end ML applications with 99.8% uptime.
+                            Focus on Generative AI, LLM fine-tuning, multi-agent orchestration, and production
+                            data engineering. Built 8+ end-to-end AI/ML systems including a fine-tuned 14B
+                            parameter model deployed on AWS EC2. Won first place at Ship to Prod Hackathon SF.
                         </p>
                         <div class="timeline-highlights">
-                            <span>Machine Learning</span>
-                            <span>Deep Learning</span>
-                            <span>Data Engineering</span>
-                            <span>MLOps</span>
+                            <span>Generative AI</span>
+                            <span>LLM Fine-tuning</span>
+                            <span>Multi-Agent Systems</span>
+                            <span>RAG Pipelines</span>
                         </div>
                     </div>
                 </div>
@@ -571,39 +685,43 @@
                 <div class="timeline-item">
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
-                        <h3 class="timeline-title">AI/ML Projects Portfolio</h3>
-                        <p class="timeline-meta">2024</p>
+                        <h3 class="timeline-title">AI & Data Engineer Intern</h3>
+                        <p class="timeline-meta">Retired.com (WAO Management LLC) · Los Angeles, CA · Jun – Dec 2025</p>
                         <p class="timeline-description">
-                            Designed and deployed production-grade ML applications serving real users.
-                            Experience spans full-stack development, model training, deployment, and monitoring.
-                            Technologies include Flask, PostgreSQL, scikit-learn, Airflow, and Snowflake.
+                            Built an LLM-based triage agent (Ollama + GPT-4o) saving 2+ hours per incident.
+                            Redesigned Snowflake ingestion pipeline — 200x cost reduction replacing a 3-hour
+                            manual run with 10 minutes. Added schema drift monitoring that reduced unplanned
+                            downtime by 40%.
                         </p>
                         <div class="timeline-highlights">
-                            <span>5 Live Applications</span>
-                            <span>5+ ML Models</span>
-                            <span>Multi-user Systems</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <h3 class="timeline-title">Data Engineering & Analytics</h3>
-                        <p class="timeline-meta">2024</p>
-                        <p class="timeline-description">
-                            Built scalable data pipelines processing thousands of records daily. Implemented
-                            ETL workflows with Apache Airflow, transformed data with dbt, and created
-                            interactive dashboards with Power BI for business intelligence.
-                        </p>
-                        <div class="timeline-highlights">
-                            <span>Airflow</span>
-                            <span>dbt</span>
+                            <span>LLM Agents</span>
                             <span>Snowflake</span>
-                            <span>Power BI</span>
+                            <span>dbt</span>
+                            <span>Azure Pipelines</span>
                         </div>
                     </div>
                 </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Analytics & ML Engineer</h3>
+                        <p class="timeline-meta">Cognizant Technology Solutions · Sanofi Pharma (EMEA) · 2018 – 2024</p>
+                        <p class="timeline-description">
+                            6 years delivering analytics systems for Sanofi Pharma across EMEA. Built regression
+                            forecasting model (15% MAPE) for quarterly territory planning. Designed A/B test
+                            to validate cloud migration — unblocked 50+ stalled pipelines using confidence
+                            intervals and chi-square tests. Led KPI definition workshops with Sales leadership.
+                        </p>
+                        <div class="timeline-highlights">
+                            <span>Snowflake</span>
+                            <span>A/B Testing</span>
+                            <span>Power BI</span>
+                            <span>Python</span>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
             <!-- Key Achievements -->
@@ -611,24 +729,24 @@
                 <h3 class="achievements-title">Key Achievements</h3>
                 <div class="achievements-grid">
                     <div class="achievement-card">
-                        <div class="achievement-icon">🎯</div>
-                        <h4>98% Model Accuracy</h4>
-                        <p>Random Forest model for risk profiling with extensive feature engineering</p>
+                        <div class="achievement-icon">🏆</div>
+                        <h4>1st Place — Ship to Prod</h4>
+                        <p>Pipeline Copilot won first place at Ship to Prod Hackathon, San Francisco 2026</p>
                     </div>
                     <div class="achievement-card">
                         <div class="achievement-icon">⚡</div>
-                        <h4>Real-Time Predictions</h4>
-                        <p>Sub-second inference time on production systems serving multiple users</p>
+                        <h4>200x Cost Reduction</h4>
+                        <p>Snowflake ingestion redesign — from $1,000/day to a fraction via incremental loads</p>
                     </div>
                     <div class="achievement-card">
-                        <div class="achievement-icon">🚀</div>
-                        <h4>99.8% Uptime</h4>
-                        <p>Production deployments on Render with automated monitoring and alerts</p>
+                        <div class="achievement-icon">🤖</div>
+                        <h4>14B Model Fine-tuned</h4>
+                        <p>Qwen2.5-14B with QLoRA on domain datasets — 94% JSON validity, deployed on AWS EC2</p>
                     </div>
                     <div class="achievement-card">
                         <div class="achievement-icon">📊</div>
-                        <h4>End-to-End Pipelines</h4>
-                        <p>Complete data workflows from ingestion to visualization and insights</p>
+                        <h4>50+ Pipelines Unblocked</h4>
+                        <p>Statistical validation framework using chi-square tests unblocked cloud migration at Sanofi</p>
                     </div>
                 </div>
             </div>
@@ -643,13 +761,14 @@
                     <span class="section-label">Get In Touch</span>
                     <h2 class="section-title">Let's Build Something Amazing</h2>
                     <p class="contact-description">
-                        I'm currently seeking opportunities in AI/ML Engineering, Data Science,
-                        and Machine Learning Operations. Open to full-time roles, internships,
-                        and collaborative projects.
+                        M.S. graduate in Applied Data Intelligence, actively seeking full-time opportunities
+                        in AI Engineering, Data Engineering, and GenAI systems. Open to roles, collaborations,
+                        and interesting conversations.
                     </p>
 
                     <div class="contact-methods">
-                        <a href="mailto:utkarsh.tripathi@sjsu.edu" class="contact-method">
+                        <!-- REPLACE THE EMAIL BELOW WITH YOUR PERSONAL EMAIL -->
+                        <a href="mailto:tripathiutkarsh46@gmail.com" class="contact-method">
                             <div class="contact-method-icon">
                                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M3 8L10.89 13.26C11.5 13.67 12.5 13.67 13.11 13.26L21 8M5 19H19C20.1046 19 21 18.1046 21 17V7C21 5.89543 20.1046 5 19 5H5C3.89543 5 3 5.89543 3 7V17C3 18.1046 3.89543 19 5 19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -657,7 +776,8 @@
                             </div>
                             <div>
                                 <div class="contact-method-label">Email</div>
-                                <div class="contact-method-value">utkarsh.tripathi@sjsu.edu</div>
+                                <!-- REPLACE BELOW WITH YOUR PERSONAL EMAIL -->
+                                <div class="contact-method-value">tripathiutkarsh46@gmail.com</div>
                             </div>
                         </a>
 
@@ -705,10 +825,10 @@
                 <div class="contact-form-container">
                     <div class="contact-cta">
                         <h3>Ready to collaborate?</h3>
-                        <p>Connect on LinkedIn or mail me to discuss opportunities.</p>
+                        <p>Connect on LinkedIn or email me to discuss opportunities.</p>
                         <div class="contact-actions">
-                            <a href="mailto:utkarsh.tripathi@sjsu.edu" class="btn btn-primary">Send Email</a>
-                
+                            <!-- REPLACE WITH YOUR PERSONAL EMAIL -->
+                            <a href="mailto:tripathiutkarsh46@gmail.com" class="btn btn-primary">Send Email</a>
                         </div>
                     </div>
                 </div>
@@ -727,10 +847,12 @@
                 <div class="footer-links">
                     <a href="https://github.com/utkarsh9630" target="_blank" rel="noopener">GitHub</a>
                     <a href="https://www.linkedin.com/in/tripathiutkarsh46/" target="_blank" rel="noopener">LinkedIn</a>
-                    <a href="mailto:utkarsh.tripathi@sjsu.edu">Email</a>
+                    <!-- REPLACE WITH YOUR PERSONAL EMAIL -->
+                    <a href="mailto:tripathiutkarsh46@gmail.com">Email</a>
                 </div>
             </div>
         </div>
     </footer>
+    <script src="script.js"></script>
 </body>
 </html>
