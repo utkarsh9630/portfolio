@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | Utkarsh Tripathi</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ── Project list ── */
+        .projects-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+        }
+
+        .proj-item {
+            position: relative;
+            border-radius: 14px;
+            border: 1px solid var(--color-border);
+            background: var(--color-surface);
+            overflow: hidden;
+            height: 108px;
+            transition:
+                height 0.42s cubic-bezier(0.25, 1, 0.5, 1),
+                border-color 0.3s ease,
+                box-shadow 0.3s ease;
+            cursor: grab;
+        }
+
+        .proj-item:active { cursor: grabbing; }
+
+        .proj-item.open {
+            height: 185px;
+            border-color: rgba(0, 168, 150, 0.25);
+            box-shadow: 0 8px 28px rgba(17, 17, 16, 0.1);
+            cursor: default;
+        }
+
+        /* cursor-light on proj-item */
+        .proj-item::before {
+            content: '';
+            position: absolute; inset: 0;
+            border-radius: inherit;
+            opacity: 0;
+            transition: opacity 0.4s;
+            background: radial-gradient(
+                420px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+                rgba(0, 168, 150, 0.05), transparent 50%
+            );
+            pointer-events: none;
+            z-index: 5;
+        }
+        .proj-item:hover::before { opacity: 1; }
+
+        /* ── Overview panel ── */
+        .proj-overview {
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            right: 3.2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0 1.2rem;
+            transition: transform 0.42s cubic-bezier(0.25, 1, 0.5, 1),
+                        opacity 0.35s ease;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .proj-item.open .proj-overview {
+            transform: translateX(-42%);
+            opacity: 0.3;
+        }
+
+        /* thumbnail */
+        .proj-thumb {
+            width: 88px;
+            height: 70px;
+            border-radius: 8px;
+            overflow: hidden;
+            flex-shrink: 0;
+            background: var(--color-bg-tertiary);
+            border: 1px solid var(--color-border);
+        }
+
+        .proj-thumb img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            object-position: top;
+            filter: saturate(0.8) brightness(0.75);
+        }
+
+        .proj-thumb-placeholder {
+            width: 100%; height: 100%;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--color-primary); opacity: 0.25;
+        }
+        .proj-thumb-placeholder svg { width: 30px; height: 30px; }
+
+        /* meta */
+        .proj-meta { flex: 1; min-width: 0; }
+
+        .proj-title-row {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 0.35rem;
+        }
+
+        .proj-name {
+            font-family: var(--font-display);
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .proj-badge {
+            font-size: 0.62rem;
+            font-weight: 700;
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+            background: rgba(0,168,150,0.12);
+            color: var(--color-primary);
+            border: 1px solid rgba(0,168,150,0.25);
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .proj-badge.badge-win {
+            background: rgba(255,189,46,0.12);
+            color: #ffbd2e;
+            border-color: rgba(255,189,46,0.25);
+        }
+
+        .proj-tech-row {
+            display: flex;
+            gap: 0.35rem;
+            flex-wrap: wrap;
+        }
+
+        .proj-tech-tag {
+            font-size: 0.7rem;
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+            background: var(--color-bg-tertiary);
+            border: 1px solid var(--color-border);
+            color: var(--color-text-tertiary);
+            white-space: nowrap;
+        }
+
+        /* compact metrics */
+        .proj-metrics-compact {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.25rem;
+            flex-shrink: 0;
+        }
+
+        .proj-metric-item {
+            text-align: right;
+        }
+
+        .proj-metric-val {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 800;
+            color: var(--color-primary);
+            line-height: 1;
+        }
+
+        .proj-metric-label {
+            font-size: 0.6rem;
+            color: var(--color-text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        /* ── Drag handle ── */
+        .proj-handle {
+            position: absolute;
+            right: 0; top: 0; bottom: 0;
+            width: 3.2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.25rem;
+            z-index: 3;
+            border-left: 1px solid var(--color-border);
+            background: rgba(255,210,140,0.02);
+            cursor: grab;
+            transition: background 0.2s, border-color 0.2s, opacity 0.35s;
+        }
+
+        .proj-handle:hover {
+            background: rgba(0,168,150,0.06);
+            border-color: rgba(0,168,150,0.2);
+        }
+
+        .proj-item.open .proj-handle {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .handle-bar {
+            width: 18px; height: 2px;
+            border-radius: 1px;
+            background: rgba(17,17,16,0.18);
+            transition: background 0.2s, width 0.2s;
+        }
+
+        .proj-handle:hover .handle-bar { background: var(--color-primary); }
+        .handle-bar:nth-child(2) { width: 12px; }
+        .handle-bar:nth-child(3) { width: 8px; }
+
+        .handle-arrow {
+            font-size: 0.55rem;
+            letter-spacing: 0.05em;
+            color: rgba(17,17,16,0.22);
+            margin-top: 0.1rem;
+            transition: color 0.2s;
+        }
+
+        .proj-handle:hover .handle-arrow { color: var(--color-primary); }
+
+        /* ── Description drawer ── */
+        .proj-desc-drawer {
+            position: absolute;
+            right: 0; top: 0; bottom: 0;
+            width: 55%;
+            transform: translateX(100%);
+            transition: transform 0.42s cubic-bezier(0.25, 1, 0.5, 1);
+            background: rgba(243, 243, 241, 0.99);
+            border-left: 1px solid rgba(0,168,150,0.15);
+            padding: 1rem 1.2rem 1rem 1.4rem;
+            z-index: 4;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            overflow-y: auto;
+        }
+
+        .proj-item.open .proj-desc-drawer {
+            transform: translateX(0);
+        }
+
+        .drawer-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .drawer-title {
+            font-family: var(--font-display);
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .drawer-close {
+            background: none;
+            border: 1px solid var(--color-border);
+            color: var(--color-text-tertiary);
+            width: 26px; height: 26px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            display: flex; align-items: center; justify-content: center;
+            transition: border-color 0.2s, color 0.2s;
+            flex-shrink: 0;
+        }
+        .drawer-close:hover { border-color: var(--color-primary); color: var(--color-primary); }
+
+        .drawer-desc {
+            font-size: 0.78rem;
+            line-height: 1.65;
+            color: var(--color-text-secondary);
+            flex: 1;
+        }
+
+        .drawer-links {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .drawer-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.35rem 0.85rem;
+            border-radius: 6px;
+            font-size: 0.74rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition-base);
+        }
+
+        .drawer-link.primary {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+            color: var(--color-bg);
+        }
+        .drawer-link.primary:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,168,150,0.2); }
+
+        .drawer-link:not(.primary) {
+            background: var(--color-bg-tertiary);
+            color: var(--color-text-primary);
+            border: 1px solid var(--color-border);
+        }
+        .drawer-link:not(.primary):hover { border-color: rgba(0,168,150,0.3); }
+
+        /* ── Slide hint line (visible on hover) ── */
+        .proj-item:not(.open)::after {
+            content: 'slide →';
+            position: absolute;
+            bottom: 0.55rem; right: 4rem;
+            font-size: 0.6rem;
+            letter-spacing: 0.15em;
+            color: rgba(17,17,16,0.1);
+            pointer-events: none;
+            transition: color 0.2s;
+            z-index: 3;
+        }
+
+        .proj-item:not(.open):hover::after {
+            color: rgba(0,168,150,0.45);
+        }
+
+        /* ── Section subtitle ── */
+        .proj-list-hint {
+            font-size: 0.72rem;
+            color: var(--color-text-tertiary);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .proj-list-hint::before {
+            content: '';
+            display: block; width: 16px; height: 1px;
+            background: var(--color-text-tertiary);
+        }
+    </style>
+</head>
+<body>
+
+<nav class="nav">
+    <div class="nav-container">
+        <a href="index.html" class="nav-logo">UT.</a>
+        <div class="nav-links">
+            <a href="index.html"       class="nav-link">Home</a>
+            <a href="projects.html"    class="nav-link">Projects</a>
+            <a href="skills.html"      class="nav-link">Skills</a>
+            <a href="experience.html"  class="nav-link">Experience</a>
+            <a href="contact.html"     class="nav-link nav-link-cta">Contact</a>
+        </div>
+        <button class="nav-toggle" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<div class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="container">
+        <div class="page-hero-label">Portfolio</div>
+        <h1 class="page-hero-title">Featured <span class="gradient-text">Projects</span></h1>
+        <p class="page-hero-sub">8 production systems — agents, pipelines, and models that ship. Slide any project right to read more.</p>
+    </div>
+</div>
+
+<section class="projects-section">
+    <div class="container">
+        <div class="proj-list-hint">Drag or swipe any row to the right to reveal details</div>
+        <div class="projects-list" id="projectsList">
+
+            <!-- 1 -->
+            <div class="proj-item" data-proj="0">
+                <div class="proj-overview">
+                    <div class="proj-thumb">
+                        <img src="images/cap_proj.png" alt="Capstone" onerror="this.parentElement.innerHTML='<div class=proj-thumb-placeholder><svg viewBox=\'0 0 24 24\' fill=\'none\'><path d=\'M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5\' stroke=\'currentColor\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg></div>'">
+                    </div>
+                    <div class="proj-meta">
+                        <div class="proj-title-row">
+                            <span class="proj-name">AI-Powered Workforce Assistants</span>
+                            <span class="proj-badge">Capstone</span>
+                            <span class="proj-badge">Multi-Agent</span>
+                        </div>
+                        <div class="proj-tech-row">
+                            <span class="proj-tech-tag">LangGraph</span>
+                            <span class="proj-tech-tag">QLoRA</span>
+                            <span class="proj-tech-tag">vLLM</span>
+                            <span class="proj-tech-tag">AWS EC2</span>
+                        </div>
+                    </div>
+                    <div class="proj-metrics-compact">
+                        <div class="proj-metric-item">
+                            <div class="proj-metric-val">0.94</div>
+                            <div class="proj-metric-label">ROUGE-1</div>
+                        </div>
+                        <div class="proj-metric-item">
+                            <div class="proj-metric-val">94%</div>
+                            <div class="proj-metric-label">JSON Valid</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="proj-handle">
+                    <div class="handle-bar"></div>
+                    <div class="handle-bar"></div>
+                    <div class="handle-bar"></div>
+                    <div class="handle-arrow">→</div>
+                </div>
+                <div class="proj-desc-drawer">
+                    <div class="drawer-header">
+                        <span class="drawer-title">About this project</span>
+                        <button class="drawer-close" aria-label="Close">←</button>
+                    </div>
+                    <p class="drawer-desc">3-agent autonomous system (Slack-to-Jira, Email-to-Calendar, Meeting Summarizer) under a LangGraph orchestrator. Shared Qwen2.5-14B base with QLoRA adapters swapped at inference via vLLM on AWS EC2. RLHF feedback loop drives weekly LoRA adapter retraining. Human approves every consequential step.</p>
+                    <div class="drawer-links">
+                        <a href="https://github.com/aishanee-sinha/Multi-Agent-Autonomous-Workforce-Assistant" target="_blank" rel="noopener" class="drawer-link">GitHub</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2 -->
+            <div class="proj-item" data-proj="1">
+                <div class="proj-overview">
+                    <div class="proj-thumb">
+                        <img src="images/pipeline_copilot_proj.png" alt="Pipeline Copilot" onerror="this.style.display='none'">
+                    </div>
+                    <div class="proj-meta">
+                        <div class="proj-title-row">
+                            <span class="proj-name">Pipeline Copilot — AI-Powered ETL</span>
+                            <span class="proj-badge badge-win">🏆 1st Place</span>
+                        </div>
+                        <div class="proj-tech-row">
+                            <span class="proj-tech-tag">GPT-4o</span>
+                            <span class="proj-tech-tag">LangGraph</span>
+                            <span class="proj-tech-tag">dbt</span>
+                            <span class="proj-tech-tag">PostgreSQL</span>
+                        </div>
+                    </div>
+                    <div class="proj-metrics-compact">
+                        <div class="proj-metric-item">
+                            <div class="proj-metric-val">3-Layer</div>
+                            <div class="proj-metric-label">dbt Pipeline</div>
+                        </div>
+                        <div class="proj-metric-item">
+                            <div class="proj-metric-val">Live</div>
+                            <div class="proj-metric-label">SSE Stream</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="proj-handle">
+                    <div class="handle-bar"></div><div class="handle-bar"></div><div class="handle-bar"></div>
+                    <div class="handle-arrow">→</div>
+                </div>
+                <div class="proj-desc-drawer">
+                    <div class="drawer-header">
+                        <span class="drawer-title">About this project</span>
+                        <button class="drawer-close" aria-label="Close">←</button>
+                    </div>
+                    <p class="drawer-desc">Won first place at Ship to Prod Hackathon, San Francisco. Plain English description to full three-layer dbt pipeline — extraction SQL, staging, mart models with schema tests — validated against real PostgreSQL database. Live streaming via SSE. The AI does the boilerplate, human reviews and approves before deploy.</p>
+                    <div class="drawer-links">
+                        <a href="https://devpost.com/software/ai-for-etl" target="_blank" rel="noopener" class="drawer-link primary">Devpost →</a>
+                        <a href="https://github.com/utkarsh9630/PipelineCopilot_public" target="_blank" rel="noopener" class="drawer-link">GitHub</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3 -->
+            <div class="proj-item" data-proj="2">
+                <div class="proj-overview">
+                    <div class="proj-thumb">
+                        <img src="images/permit_lens_proj.png" alt="PermitLens" onerror="this.style.display='none'">
+                    </div>
+                    <div class="proj-meta">
+                        <div class="proj-title-row">
+                            <span class="proj-name">PermitLens — AI Permit Guidance</span>
+                            <span class="proj-badge">RAG</span>
+                            <span class="proj-badge">IBM watsonx</span>
+                        </div>
+                        <div class="proj-tech-row">
+                            <span class="proj-tech-tag">IBM Granite</span>
+                            <span class="proj-tech-tag">watsonx.ai</span>
+                            <span class="proj-tech-tag">Next.js</span>
+                        </div>
+                    </div>
+                    <div class="proj-metrics-compact">
+                        <div class="proj-metric-item">
+                            <div class="proj-metric-val">5</div>
+                            <div class="proj-metric-label">AI Agents</div>
+                        </div>
+                        <div class="proj-metric-item">
+                            <div class="proj-metric-val">Live</div>
+                            <div class="proj-metric-label">City Retrieval</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="proj-handle">
+                    <div class="handle-bar"></div><div class="handle-bar"></div><div class="handle-bar"></div>
+                    <div class="handle-arrow">→</div>
+                </div>
+                <div class="proj-desc-drawer">
+                    <div class="drawer-header">
+                        <span class="drawer-title">About this project</span>
+                        <button class="drawer-close" aria-label="Close">←</button>
+                    </div>
+                    <p class="drawer-desc">5-agent RAG pipeline using IBM Granite 3 8B via watsonx.ai. Live retrieval from verified city permit pages, PII scrubbing before inference, and a Guardrail agent enforcing source citation and stripping approval language. IBM watsonx.governance logs every inference call as an AI Factsheet.</p>
+                    <div class="drawer-links">
+                        <a href="https://github.com/preethisighavi/PermitLens_Public_Repo" target="_blank" rel="noopener" class="drawer-link">GitHub</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4 -->
+            <div class="proj-item" data-proj="3">
+                <div class="proj-overview">
+                    <div class="proj-thumb">
+                        <img src="images/AI4Invest.png" alt="AI4Invest" onerror="this.style.display='none'">
+                    </div>
+                    <div class="proj-meta">
+                        <div class="proj-title-row">
+                            <span class="proj-name">AI4Invest — Financial Risk Profiling</span>
+                            <span class="proj-badge">Live</span>
+                        </div>
+                        <div class="proj-tech-row">
+                            <span class="proj-tech-tag">Flask</span>
+                            <span class="proj-tech-tag">scikit-learn</span>
+                            <span class="proj-tech-tag">Random Forest</span>
+                            <span class="proj-tech-tag">K-means</span>
+                        </div>
+                    </div>
+                    <div class="proj-metrics-compact">
+                        <div class="proj-metric-item">
+                            <div class="proj-metric-val">98%</div>
+                            <div class="proj-metric-label">Accuracy</div>
+                        </div>
+                        <div class="proj-metric-item">
+                            <div class="proj-metric-val">200+</div>
+                            <div class="proj-metric-label">Users</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="proj-handle">
+                    <div class="handle-bar"></div><div class="handle-bar"></div><div class="handle-bar"></div>
+                    <div class="handle-arrow">→</div>
+                </div>
+                <div class="proj-desc-drawer">
+                    <div class="drawer-header">
+                        <span class="drawer-title">About this project</span>
+                        <button class="drawer-close" aria-label="Close">←</button>
+                    </div>
+                    <p class="drawer-desc">ML-powered financial risk assessment platform analyzing 19 factors to classify users into risk categories and provide personalized S&amp;P 500 stock recommendations. K-means clustering on factor signals (vol30, mom30, beta60) mirrors MSCI's factor index construction logic. Features investment simulator with 90-day return predictions.</p>
+                    <div class="drawer-links">
+                        <a href="https://ai4invest.vercel.app/login" target="_blank" rel="noopener" class="drawer-link primary">Live Demo →</a>
+                        <a href="https://github.com/utkarsh9630/ai4invest" target="_blank" rel="noopener" class="drawer-link">GitHub</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5 -->
+            <div class="proj-item" data-proj="4">
+                <div class="proj-overview">
+                    <div class="proj-thumb">
+                        <img src="images/MentalStress.png" alt="Mental Stress" onerror="this.style.display='none'">
+                    </div>
+                    <div class="proj-meta">
+                        <div class="proj-title-row">
+                            <span class="proj-name">Mental Stress Assessment System</span>
+                            <span class="proj-badge">Live</span>
+                            <span class="proj-badge">Healthcare</span>
+                        </div>
+                        <div class="proj-tech-row">
+                            <span class="proj-tech-tag">Flask</span>
+                            <span class="proj-tech-tag">Random Forest</span>
+                            <span class="proj-tech-tag">k-NN</span>
+                            <span class="proj-tech-tag">PostgreSQL</span>
+                        </div>
+                    </div>
+                    <div class="proj-metrics-compact">
+                        <div class="proj-metric-item">
+                            <div class="proj-metric-val">20</div>
+                            <div class="proj-metric-label">Features</div>
+                        </div>
+                        <div class="proj-metric-item">
+                            <div class="proj-metric-val">k=50</div>
+                            <div class="proj-metric-label">Neighbors</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="proj-handle">
+                    <div class="handle-bar"></div><div class="handle-bar"></div><div class="handle-bar"></div>
+                    <div class="handle-arrow">→</div>
+                </div>
+                <div class="proj-desc-drawer">
+                    <div class="drawer-header">
+                        <span class="drawer-title">About this project</span>
+                        <button class="drawer-close" aria-label="Close">←</button>
+                    </div>
+                    <p class="drawer-desc">AI-powered web application predicting student mental stress levels with personalized coping mechanism recommendations. Random Forest on 20 psychosocial features with engineered Stress Ratio feature. KNN recommendation engine ranks coping strategies by real-world success rate among similar profiles.</p>
+                    <div class="drawer-links">
+                        <a href="https://mental-stress-assessment.vercel.app/login" target="_blank" rel="noopener" class="drawer-link primary">Live Demo →</a>
+                        <a href="https://github.com/utkarsh9630/mental-stress-assessment" target="_blank" rel="noopener" class="drawer-link">GitHub</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6 -->
+            <div class="proj-item" data-proj="5">
+                <div class="proj-overview">
+                    <div class="proj-thumb">
+                        <img src="images/VerdictAI.png" alt="VerdictAI" onerror="this.style.display='none'">
+                    </div>
+                    <div class="proj-meta">
+                        <div class="proj-title-row">
+                            <span class="proj-name">VerdictAI — Explainable Fact Checking</span>
+                            <span class="proj-badge">Chain-of-Debate</span>
+                        </div>
+                        <div class="proj-tech-row">
+                            <span class="proj-tech-tag">FastAPI</span>
+                            <span class="proj-tech-tag">GPT-4o-mini</span>
+                            <span class="proj-tech-tag">You.com API</span>
+                            <span class="proj-tech-tag">SQLite</span>
+                        </div>
+                    </div>
+                    <div class="proj-metrics-compact">
+                        <div class="proj-metric-item">
+                            <div class="proj-metric-val">85%+</div>
+                            <div class="proj-metric-label">Cache Hits</div>
+                        </div>
+                        <div class="proj-metric-item">
+                            <div class="proj-metric-val">92%</div>
+                            <div class="proj-metric-label">Alignment</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="proj-handle">
+                    <div class="handle-bar"></div><div class="handle-bar"></div><div class="handle-bar"></div>
+                    <div class="handle-arrow">→</div>
+                </div>
+                <div class="proj-desc-drawer">
+                    <div class="drawer-header">
+                        <span class="drawer-title">About this project</span>
+                        <button class="drawer-close" aria-label="Close">←</button>
+                    </div>
+                    <p class="drawer-desc">Multi-agent fact-checking system using Chain-of-Debate architecture. Retrieves real-time supporting and refuting evidence via You.com, runs Verifier vs Skeptic debate moderated by a third agent, and returns a verdict with full reasoning transcript. SQLite memory with fuzzy matching gives 85%+ cache hit rate.</p>
+                    <div class="drawer-links">
+                        <a href="https://github.com/utkarsh9630/VerdictAI" target="_blank" rel="noopener" class="drawer-link primary">GitHub →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 7 -->
+            <div class="proj-item" data-proj="6">
+                <div class="proj-overview">
+                    <div class="proj-thumb">
+                        <img src="images/ticketguard_proj.png" alt="TicketGuard" onerror="this.style.display='none'">
+                    </div>
+                    <div class="proj-meta">
+                        <div class="proj-title-row">
+                            <span class="proj-name">TicketGuard — AI Ticket Scam Triage</span>
+                            <span class="proj-badge">Live</span>
+                            <span class="proj-badge">NVIDIA NIM</span>
+                        </div>
+                        <div class="proj-tech-row">
+                            <span class="proj-tech-tag">Next.js 15</span>
+                            <span class="proj-tech-tag">TypeScript</span>
+                            <span class="proj-tech-tag">Nemotron</span>
+                        </div>
+                    </div>
+                    <div class="proj-metrics-compact">
+                        <div class="proj-metric-item">
+                            <div class="proj-metric-val">&lt;20s</div>
+                            <div class="proj-metric-label">Triage Time</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="proj-handle">
+                    <div class="handle-bar"></div><div class="handle-bar"></div><div class="handle-bar"></div>
+                    <div class="handle-arrow">→</div>
+                </div>
+                <div class="proj-desc-drawer">
+                    <div class="drawer-header">
+                        <span class="drawer-title">About this project</span>
+                        <button class="drawer-close" aria-label="Close">←</button>
+                    </div>
+                    <p class="drawer-desc">Real-time scam-risk triage for ticket resale listings powered by NVIDIA's Nemotron model via NIM. Chain-of-Debate multi-agent approach returns structured risk assessments with confidence score and evidence-backed reasoning. Built at NVIDIA Hackathon, deployed on Vercel.</p>
+                    <div class="drawer-links">
+                        <a href="https://hack-ticket-resla-triage.vercel.app" target="_blank" rel="noopener" class="drawer-link primary">Live Demo →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 8 -->
+            <div class="proj-item" data-proj="7">
+                <div class="proj-overview">
+                    <div class="proj-thumb">
+                        <img src="images/energy_proj.png" alt="Energy Forecasting" onerror="this.style.display='none'">
+                    </div>
+                    <div class="proj-meta">
+                        <div class="proj-title-row">
+                            <span class="proj-name">Intelligent Energy Demand Forecasting</span>
+                            <span class="proj-badge">Data Engineering</span>
+                        </div>
+                        <div class="proj-tech-row">
+                            <span class="proj-tech-tag">Airflow</span>
+                            <span class="proj-tech-tag">dbt</span>
+                            <span class="proj-tech-tag">Snowflake</span>
+                            <span class="proj-tech-tag">Power BI</span>
+                        </div>
+                    </div>
+                    <div class="proj-metrics-compact">
+                        <div class="proj-metric-item">
+                            <div class="proj-metric-val">7 Days</div>
+                            <div class="proj-metric-label">Forecast</div>
+                        </div>
+                        <div class="proj-metric-item">
+                            <div class="proj-metric-val">Daily</div>
+                            <div class="proj-metric-label">Auto Updates</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="proj-handle">
+                    <div class="handle-bar"></div><div class="handle-bar"></div><div class="handle-bar"></div>
+                    <div class="handle-arrow">→</div>
+                </div>
+                <div class="proj-desc-drawer">
+                    <div class="drawer-header">
+                        <span class="drawer-title">About this project</span>
+                        <button class="drawer-close" aria-label="Close">←</button>
+                    </div>
+                    <p class="drawer-desc">End-to-end data pipeline forecasting California electricity consumption using EIA and OpenMeteo APIs. Orchestrated with Apache Airflow, transformed with dbt, loaded to Snowflake with ML forecasting for 7-day predictions. Visualized in Power BI with daily auto-updates.</p>
+                    <div class="drawer-links">
+                        <a href="https://github.com/utkarsh9630/Projects/tree/main/Energy_Demand_and_Forecasting" target="_blank" rel="noopener" class="drawer-link primary">View Details →</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-inner">
+            <a href="index.html" class="footer-logo">UT.</a>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="skills.html">Skills</a>
+                <a href="experience.html">Experience</a>
+                <a href="contact.html">Contact</a>
+                <a href="https://github.com/utkarsh9630" target="_blank" rel="noopener">GitHub</a>
+            </div>
+            <span class="footer-copy">© 2026 Utkarsh Tripathi</span>
+        </div>
+    </div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+(function () {
+    const items = document.querySelectorAll('.proj-item');
+
+    items.forEach(item => {
+        let startX = 0;
+        let dragging = false;
+        const handle = item.querySelector('.proj-handle');
+        const closeBtn = item.querySelector('.drawer-close');
+
+        function openItem() {
+            // close all others first
+            items.forEach(i => { if (i !== item) i.classList.remove('open'); });
+            item.classList.add('open');
+        }
+        function closeItem() { item.classList.remove('open'); }
+
+        // Click handle → open
+        handle.addEventListener('click', openItem);
+
+        // Click close button → close
+        closeBtn.addEventListener('click', (e) => { e.stopPropagation(); closeItem(); });
+
+        // Drag / swipe
+        function onDragStart(x) { startX = x; dragging = true; }
+        function onDragMove(x) {
+            if (!dragging) return;
+            const dx = x - startX;
+            if (dx > 45 && !item.classList.contains('open'))  openItem();
+            if (dx < -45 && item.classList.contains('open'))  closeItem();
+        }
+        function onDragEnd() { dragging = false; }
+
+        // Mouse
+        item.addEventListener('mousedown', e => {
+            if (e.target.closest('.proj-desc-drawer')) return;
+            onDragStart(e.clientX);
+        });
+        window.addEventListener('mousemove', e => onDragMove(e.clientX));
+        window.addEventListener('mouseup',   onDragEnd);
+
+        // Touch
+        item.addEventListener('touchstart', e => {
+            if (e.target.closest('.proj-desc-drawer')) return;
+            onDragStart(e.touches[0].clientX);
+        }, { passive: true });
+        item.addEventListener('touchmove', e => onDragMove(e.touches[0].clientX), { passive: true });
+        item.addEventListener('touchend', onDragEnd, { passive: true });
+
+        // Cursor light
+        item.addEventListener('mousemove', e => {
+            const r = item.getBoundingClientRect();
+            item.style.setProperty('--mouse-x', `${((e.clientX - r.left) / r.width) * 100}%`);
+            item.style.setProperty('--mouse-y', `${((e.clientY - r.top) / r.height) * 100}%`);
+        });
+    });
+
+    // Close open item when clicking outside
+    document.addEventListener('click', e => {
+        if (!e.target.closest('.proj-item')) {
+            items.forEach(i => i.classList.remove('open'));
+        }
+    });
+})();
+</script>
+</body>
+</html>

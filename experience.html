@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experience | Utkarsh Tripathi</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ════════════════════════════════
+           CAREER LADDER
+           ════════════════════════════════ */
+        .ladder-section {
+            padding: var(--spacing-3xl) 0 var(--spacing-2xl);
+        }
+
+        .ladder-section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .ladder-section-header .section-label { margin-bottom: 0.5rem; }
+
+        /* Outer container — relative, holds the spine */
+        .career-ladder {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+            padding: 0 0 1rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* ── Vertical spine ── */
+        .ladder-spine {
+            position: absolute;
+            left: 50%;
+            top: 0; bottom: 0;
+            width: 2px;
+            transform: translateX(-50%);
+            background: linear-gradient(
+                to bottom,
+                var(--color-primary) 0%,
+                rgba(0,168,150,0.4) 50%,
+                var(--color-accent) 100%
+            );
+            z-index: 0;
+        }
+
+        /* ── Shared step styles ── */
+        .lstep {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            display: grid;
+            align-items: start;
+        }
+
+        /* ── CURRENT step (centred below spine node) ── */
+        .lstep-current {
+            grid-template-columns: 1fr;
+            justify-items: center;
+            padding-bottom: 3.5rem;
+        }
+
+        /* ── LEFT & RIGHT steps ── */
+        .lstep-left,
+        .lstep-right {
+            grid-template-columns: 1fr 90px 1fr;
+            align-items: center;
+            padding-bottom: 2.5rem;
+        }
+
+        /* ────────────────────────────
+           Spine nodes
+           ──────────────────────────── */
+        .lstep-node {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 0.3rem;
+            position: relative;
+            z-index: 2;
+            grid-column: 2;
+        }
+
+        .node-circle {
+            width: 15px; height: 15px;
+            border-radius: 50%;
+            background: var(--color-primary);
+            border: 3px solid var(--color-bg);
+            box-shadow: 0 0 0 3px rgba(0,168,150,0.18);
+            flex-shrink: 0;
+        }
+
+        .node-year {
+            font-size: 0.62rem;
+            color: rgba(17,17,16,0.38);
+            letter-spacing: 0.08em;
+            white-space: nowrap;
+        }
+
+        /* current node */
+        .node-circle-current {
+            width: 22px; height: 22px;
+            background: var(--color-primary);
+            border: 3px solid var(--color-bg);
+            box-shadow: 0 0 0 6px rgba(0,168,150,0.18);
+            position: relative;
+        }
+
+        /* Pulse rings on current node */
+        .node-circle-current::before,
+        .node-circle-current::after {
+            content: '';
+            position: absolute;
+            inset: -8px;
+            border-radius: 50%;
+            border: 1px solid rgba(0,168,150,0.25);
+            animation: nodeRing 2.5s ease-out infinite;
+        }
+        .node-circle-current::after {
+            inset: -16px;
+            animation-delay: 1.25s;
+        }
+
+        @keyframes nodeRing {
+            0%   { transform: scale(0.7); opacity: 0.5; }
+            100% { transform: scale(1);   opacity: 0; }
+        }
+
+        .node-badge-now {
+            font-size: 0.58rem;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--color-primary);
+            background: rgba(0,168,150,0.1);
+            border: 1px solid rgba(0,168,150,0.3);
+            padding: 0.12rem 0.45rem;
+            border-radius: 3px;
+        }
+
+        /* ── Rung connector lines ── */
+        .rung-line {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0,168,150,0.2), transparent);
+        }
+
+        .lstep-left  .rung-line { grid-column: 1; width: 100%; }
+        .lstep-right .rung-line { grid-column: 3; width: 100%; }
+
+        /* empty cells */
+        .lstep-left  .rung-empty { grid-column: 3; }
+        .lstep-right .rung-empty { grid-column: 1; }
+        .lstep-left  .rung-line  { grid-column: 1; }
+        .lstep-right .rung-line  { grid-column: 3; }
+
+        /* ────────────────────────────
+           Cards
+           ──────────────────────────── */
+        .lstep-card {
+            border-radius: 14px;
+            border: 1px solid var(--color-border);
+            background: var(--color-surface);
+            padding: 1.5rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .lstep-card::before {
+            content: '';
+            position: absolute; inset: 0;
+            border-radius: inherit;
+            opacity: 0;
+            transition: opacity 0.4s;
+            background: radial-gradient(
+                400px circle at var(--mouse-x,50%) var(--mouse-y,50%),
+                rgba(0,168,150,0.06), transparent 50%
+            );
+            pointer-events: none;
+            z-index: 1;
+        }
+        .lstep-card:hover::before { opacity: 1; }
+
+        /* Current card */
+        .card-current {
+            width: 640px;
+            max-width: 100%;
+            border-color: rgba(0,168,150,0.35);
+            box-shadow:
+                0 0 40px rgba(0,168,150,0.1),
+                0 12px 32px rgba(17,17,16,0.1);
+            padding: 2rem 2.2rem;
+        }
+
+        /* Past cards */
+        .card-past {
+            width: 100%;
+            opacity: 0.9;
+        }
+        .card-oldest { opacity: 0.75; }
+
+        /* Compact card for smaller concurrent entry */
+        .card-compact {
+            opacity: 0.82;
+        }
+        .card-compact .card-past-title { font-size: 0.95rem; }
+        .card-compact .card-past-desc  { font-size: 0.78rem; }
+        .card-compact .card-past-org   { font-size: 0.73rem; }
+        .card-compact { padding: 1rem 1.1rem; }
+
+        /* Foundation / base card */
+        .card-base {
+            opacity: 0.7;
+            border-color: rgba(245,158,11,0.2);
+        }
+        .card-base .card-past-badge {
+            background: rgba(245,158,11,0.1);
+            border-color: rgba(245,158,11,0.3);
+            color: #f59e0b;
+        }
+        .card-base .card-past-title { font-size: 1rem; }
+
+        /* Foundation base anchor at bottom of spine */
+        .ladder-base-anchor {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.4rem;
+            padding-top: 0.5rem;
+        }
+        .base-anchor-line {
+            width: 2px; height: 24px;
+            background: linear-gradient(to bottom, rgba(245,158,11,0.4), transparent);
+        }
+        .base-anchor-cap {
+            width: 28px; height: 4px;
+            border-radius: 2px;
+            background: rgba(245,158,11,0.3);
+        }
+        .base-anchor-label {
+            font-size: 0.6rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: rgba(245,158,11,0.4);
+            margin-top: 0.2rem;
+        }
+
+        /* Current card inner layout */
+        .card-current-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 0.85rem;
+        }
+
+        .card-current-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.25rem 0.7rem;
+            border-radius: 5px;
+            background: rgba(0,168,150,0.1);
+            border: 1px solid rgba(0,168,150,0.3);
+            color: var(--color-primary);
+            font-size: 0.68rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            flex-shrink: 0;
+        }
+
+        .card-current-badge::before {
+            content: '';
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: var(--color-primary);
+            animation: blink 1.2s ease-in-out infinite;
+        }
+
+        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+        .card-current-title {
+            font-family: var(--font-display);
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--color-text-primary);
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.25rem;
+        }
+
+        .card-current-org {
+            font-size: 0.85rem;
+            color: var(--color-primary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-current-period {
+            font-size: 0.75rem;
+            color: var(--color-text-tertiary);
+            margin-bottom: 1rem;
+        }
+
+        .card-current-desc {
+            font-size: 0.88rem;
+            line-height: 1.65;
+            color: var(--color-text-secondary);
+            margin-bottom: 1.2rem;
+            position: relative; z-index: 2;
+        }
+
+        .card-current-highlights {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            position: relative; z-index: 2;
+        }
+
+        .card-current-highlights span {
+            padding: 0.3rem 0.75rem;
+            background: rgba(0,168,150,0.08);
+            border: 1px solid rgba(0,168,150,0.18);
+            border-radius: 5px;
+            font-size: 0.75rem;
+            color: rgba(0,245,212,0.75);
+        }
+
+        /* Past card inner layout */
+        .card-past-badge {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            background: rgba(240,235,224,0.06);
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            color: var(--color-text-tertiary);
+            font-size: 0.64rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.6rem;
+        }
+
+        .card-past-title {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            line-height: 1.2;
+            margin-bottom: 0.2rem;
+        }
+
+        .card-past-org {
+            font-size: 0.8rem;
+            color: rgba(240,235,224,0.45);
+            margin-bottom: 0.55rem;
+        }
+
+        .card-past-desc {
+            font-size: 0.83rem;
+            line-height: 1.6;
+            color: var(--color-text-secondary);
+            margin-bottom: 0.85rem;
+            position: relative; z-index: 2;
+        }
+
+        .card-past-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.35rem;
+            position: relative; z-index: 2;
+        }
+
+        .card-past-tags span {
+            padding: 0.25rem 0.6rem;
+            background: var(--color-bg-tertiary);
+            border-radius: 4px;
+            font-size: 0.72rem;
+            color: var(--color-text-tertiary);
+        }
+
+        /* ── Reveal animations ── */
+        .lstep { opacity: 0; }
+        .lstep.ladder-visible { animation: ladderIn 0.6s cubic-bezier(0.16,1,0.3,1) forwards; }
+
+        .lstep-current.ladder-visible {
+            animation: ladderInCurrent 0.7s cubic-bezier(0.16,1,0.3,1) forwards;
+        }
+        .lstep-left.ladder-visible  { animation: ladderInLeft 0.6s cubic-bezier(0.16,1,0.3,1) forwards; }
+        .lstep-right.ladder-visible { animation: ladderInRight 0.6s cubic-bezier(0.16,1,0.3,1) forwards; }
+
+        @keyframes ladderInCurrent {
+            from { opacity:0; transform:scale(0.93) translateY(20px); }
+            to   { opacity:1; transform:scale(1) translateY(0); }
+        }
+        @keyframes ladderInLeft {
+            from { opacity:0; transform:translateX(-40px); }
+            to   { opacity:1; transform:translateX(0); }
+        }
+        @keyframes ladderInRight {
+            from { opacity:0; transform:translateX(40px); }
+            to   { opacity:1; transform:translateX(0); }
+        }
+
+        /* ════════════════════════════════
+           ACHIEVEMENTS — SCRATCH REVEAL
+           ════════════════════════════════ */
+        .achievements-section {
+            padding: 0 0 var(--spacing-3xl);
+        }
+
+        .achievements-title {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--color-text-primary);
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.2rem;
+        }
+
+        .achievement-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 14px;
+            padding: 1.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .achievement-card:hover {
+            border-color: rgba(0,245,212,0.22);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.28);
+        }
+
+        /* ── Scratch cover ── */
+        .scratch-cover {
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background-color: var(--color-bg-secondary);
+            background-image: repeating-linear-gradient(
+                135deg,
+                transparent,
+                transparent 5px,
+                rgba(255,210,140,0.035) 5px,
+                rgba(255,210,140,0.035) 10px
+            );
+            z-index: 10;
+            pointer-events: none;
+            /* clip: full rect initially, sweeps to nothing */
+            clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+            transition: clip-path 0.65s cubic-bezier(0.77, 0, 0.18, 1);
+        }
+
+        /* Shimmer that sweeps before reveal */
+        .scratch-shimmer {
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: linear-gradient(
+                135deg,
+                transparent 20%,
+                rgba(0,168,150,0.18) 48%,
+                rgba(255,255,255,0.05) 50%,
+                rgba(0,245,212,0.12) 52%,
+                transparent 70%
+            );
+            background-size: 300% 300%;
+            z-index: 11;
+            pointer-events: none;
+            opacity: 0;
+        }
+
+        /* State: shimmer running */
+        .achievement-card.scratching .scratch-shimmer {
+            opacity: 1;
+            animation: shimmerDiag 0.45s ease forwards;
+        }
+
+        @keyframes shimmerDiag {
+            from { background-position: 200% 200%; }
+            to   { background-position: -100% -100%; }
+        }
+
+        /* State: fully scratched → cover sweeps away diagonally */
+        .achievement-card.scratched .scratch-cover {
+            /* wipe from top-left to bottom-right: pull the clip rect off to bottom-right */
+            clip-path: polygon(110% 0%, 110% 0%, 110% 110%, 110% 110%);
+        }
+
+        .achievement-card.scratched .scratch-shimmer {
+            opacity: 0;
+        }
+
+        /* Card content (sits below scratch layers) */
+        .achievement-icon {
+            font-size: 2.2rem;
+            margin-bottom: 0.9rem;
+            position: relative; z-index: 2;
+        }
+
+        .achievement-card h4 {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 0.5rem;
+            position: relative; z-index: 2;
+        }
+
+        .achievement-card p {
+            font-size: 0.83rem;
+            color: var(--color-text-secondary);
+            line-height: 1.55;
+            position: relative; z-index: 2;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            .lstep-left, .lstep-right {
+                grid-template-columns: 1fr 60px 1fr;
+            }
+            .card-current { width: 100%; padding: 1.4rem; }
+            .card-current-title { font-size: 1.25rem; }
+        }
+
+        @media (max-width: 540px) {
+            .lstep-left, .lstep-right {
+                grid-template-columns: 1fr;
+            }
+            .lstep-left .lstep-node,
+            .lstep-right .lstep-node { display: none; }
+            .rung-line, .rung-empty { display: none; }
+            .lstep-left .lstep-card,
+            .lstep-right .lstep-card { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="nav">
+    <div class="nav-container">
+        <a href="index.html" class="nav-logo">UT.</a>
+        <div class="nav-links">
+            <a href="index.html"       class="nav-link">Home</a>
+            <a href="projects.html"    class="nav-link">Projects</a>
+            <a href="skills.html"      class="nav-link">Skills</a>
+            <a href="experience.html"  class="nav-link">Experience</a>
+            <a href="contact.html"     class="nav-link nav-link-cta">Contact</a>
+        </div>
+        <button class="nav-toggle" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<div class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="container">
+        <div class="page-hero-label">Background</div>
+        <h1 class="page-hero-title">The <span class="gradient-text">Climb</span></h1>
+        <p class="page-hero-sub">From Data Analyst to Data Engineer to AI Engineer — 6+ years of climbing the ladder, one rung at a time.</p>
+    </div>
+</div>
+
+<!-- Career Ladder -->
+<section class="ladder-section" style="background: var(--color-bg-secondary);">
+    <div class="container">
+        <div class="career-ladder" id="careerLadder">
+            <div class="ladder-spine"></div>
+
+            <!-- ════════════════════════════════
+                 TOP — CURRENT / NOW (zoomed, centered)
+                 Graduated May 2026 → Open to Work
+                 ════════════════════════════════ -->
+            <div class="lstep lstep-current">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:0.35rem;margin-bottom:1.2rem;position:relative;z-index:2;">
+                    <div class="node-circle-current"></div>
+                    <span class="node-badge-now">NOW</span>
+                </div>
+                <div class="lstep-card card-current">
+                    <div class="card-current-header">
+                        <div>
+                            <h3 class="card-current-title">AI / ML Engineer</h3>
+                            <div class="card-current-org">M.S. Graduated · San Jose State University · May 2026</div>
+                            <div class="card-current-period">Open to full-time opportunities in AI Engineering &amp; Data Engineering</div>
+                        </div>
+                        <span class="card-current-badge">Current</span>
+                    </div>
+                    <p class="card-current-desc">
+                        Freshly graduated with M.S. Applied Data Intelligence. Shipped 8+ production AI/ML systems — LangGraph multi-agent pipelines, QLoRA fine-tuned 14B LLMs on AWS EC2, RAG systems, and ETL pipelines that cut cost 200×. First place at Ship to Prod Hackathon SF 2026. Looking for an ambitious team to build intelligent systems with.
+                    </p>
+                    <div class="card-current-highlights">
+                        <span>LangGraph</span><span>QLoRA / vLLM</span><span>RAG</span><span>Snowflake · dbt</span><span>AWS EC2</span><span>Open to Work</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ════════════════════════════════
+                 RUNG 3 — Concurrent (2024-2026)
+                 LEFT (big):  M.S. SJSU
+                 RIGHT (small): Retired.com Internship
+                 ════════════════════════════════ -->
+            <div class="lstep lstep-left lstep-right" style="align-items:start;">
+                <!-- SJSU — BIG LEFT card -->
+                <div class="lstep-card card-past" style="grid-column:1; margin-right:1rem;">
+                    <div class="card-past-badge">Graduated 2026</div>
+                    <h3 class="card-past-title">M.S. Applied Data Intelligence</h3>
+                    <div class="card-past-org">San Jose State University · San Jose, CA · 2024 – 2026</div>
+                    <p class="card-past-desc">Focused on Generative AI, LLM fine-tuning, multi-agent orchestration, and production data engineering. Built 8+ end-to-end AI/ML systems including a fine-tuned 14B model on AWS EC2. Won 1st place at Ship to Prod Hackathon SF.</p>
+                    <div class="card-past-tags">
+                        <span>Generative AI</span><span>LLM Fine-tuning</span><span>Multi-Agent</span><span>RAG Pipelines</span><span>Data Engineering</span>
+                    </div>
+                </div>
+                <!-- Node in CENTRE -->
+                <div class="lstep-node" style="grid-column:2; margin-top:1.2rem;">
+                    <div class="node-circle"></div>
+                    <span class="node-year">2024</span>
+                </div>
+                <!-- Retired.com — SMALL RIGHT card -->
+                <div class="lstep-card card-past card-compact" style="grid-column:3; margin-left:1rem;">
+                    <div class="card-past-badge" style="background:rgba(255,107,53,0.08);border-color:rgba(255,107,53,0.25);color:#ff6b35;">Internship</div>
+                    <h3 class="card-past-title">AI & Data Engineer Intern</h3>
+                    <div class="card-past-org">Retired.com · Los Angeles · Jun–Dec 2025</div>
+                    <p class="card-past-desc">Concurrent with M.S. studies. Built LLM triage agent (GPT-4o), redesigned Snowflake pipeline saving 200× cost, added schema drift monitoring (−40% downtime).</p>
+                    <div class="card-past-tags">
+                        <span>LLM Agents</span><span>Snowflake</span><span>dbt</span><span>Azure</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ════════════════════════════════
+                 RUNG 2 — Cognizant / Sanofi EMEA
+                 RIGHT side (2018-2024)
+                 ════════════════════════════════ -->
+            <div class="lstep lstep-right">
+                <div style="grid-column:1;"></div>
+                <div class="lstep-node" style="grid-column:2;">
+                    <div class="node-circle" style="background:var(--color-accent);box-shadow:0 0 0 3px rgba(255,107,53,0.18)"></div>
+                    <span class="node-year">2018</span>
+                </div>
+                <div class="lstep-card card-past card-oldest" style="grid-column:3; margin-left:1rem;">
+                    <div class="card-past-badge">6 Years</div>
+                    <h3 class="card-past-title">Analytics & ML Engineer</h3>
+                    <div class="card-past-org">Cognizant · Sanofi Pharma (EMEA) · 2018 – 2024</div>
+                    <p class="card-past-desc">Started as Data Analyst, grew into Data Engineer. Built regression forecasting (15% MAPE), designed A/B tests that unblocked 50+ pipelines, led KPI definition workshops with Sales leadership across EMEA.</p>
+                    <div class="card-past-tags">
+                        <span>Snowflake</span><span>A/B Testing</span><span>Power BI</span><span>Python</span><span>dbt</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ════════════════════════════════
+                 BASE — B.E. Electronics Engineering
+                 LEFT side (2014-2018) — Foundation
+                 ════════════════════════════════ -->
+            <div class="lstep lstep-left">
+                <div class="lstep-card card-past card-base" style="grid-column:1; margin-right:1rem;">
+                    <div class="card-past-badge">Foundation</div>
+                    <h3 class="card-past-title">B.E. Electronics Engineering</h3>
+                    <div class="card-past-org">University · India · 2014 – 2018</div>
+                    <p class="card-past-desc">The base of the ladder — core engineering fundamentals in electronics, circuits, signal processing, and programming that built the analytical thinking underlying every system since.</p>
+                    <div class="card-past-tags">
+                        <span>Electronics</span><span>Signal Processing</span><span>C / C++</span><span>Mathematics</span>
+                    </div>
+                </div>
+                <div class="lstep-node" style="grid-column:2;">
+                    <div class="node-circle" style="background:#f59e0b;box-shadow:0 0 0 3px rgba(245,158,11,0.2)"></div>
+                    <span class="node-year">2014</span>
+                </div>
+                <div style="grid-column:3;"></div>
+            </div>
+
+            <!-- Ladder base anchor -->
+            <div class="ladder-base-anchor">
+                <div class="base-anchor-line"></div>
+                <div class="base-anchor-cap"></div>
+                <span class="base-anchor-label">The Beginning</span>
+            </div>
+
+        </div><!-- /career-ladder -->
+    </div>
+</section>
+
+<!-- Achievements — Scratch Reveal -->
+<section class="achievements-section" style="background: var(--color-bg-secondary); padding-top: var(--spacing-xl);">
+    <div class="container">
+        <h3 class="achievements-title">Key Achievements</h3>
+        <div class="achievements-grid">
+
+            <div class="achievement-card">
+                <div class="scratch-cover"></div>
+                <div class="scratch-shimmer"></div>
+                <div class="achievement-icon">🏆</div>
+                <h4>1st Place — Ship to Prod</h4>
+                <p>Pipeline Copilot won first place at Ship to Prod Hackathon, San Francisco 2026</p>
+            </div>
+
+            <div class="achievement-card">
+                <div class="scratch-cover"></div>
+                <div class="scratch-shimmer"></div>
+                <div class="achievement-icon">⚡</div>
+                <h4>200x Cost Reduction</h4>
+                <p>Snowflake ingestion redesign — from $1,000/day to a fraction via incremental loads</p>
+            </div>
+
+            <div class="achievement-card">
+                <div class="scratch-cover"></div>
+                <div class="scratch-shimmer"></div>
+                <div class="achievement-icon">🤖</div>
+                <h4>14B Model Fine-tuned</h4>
+                <p>Qwen2.5-14B with QLoRA on domain datasets — 94% JSON validity, deployed on AWS EC2</p>
+            </div>
+
+            <div class="achievement-card">
+                <div class="scratch-cover"></div>
+                <div class="scratch-shimmer"></div>
+                <div class="achievement-icon">📊</div>
+                <h4>50+ Pipelines Unblocked</h4>
+                <p>Statistical validation framework using chi-square tests unblocked cloud migration at Sanofi</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-inner">
+            <a href="index.html" class="footer-logo">UT.</a>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="projects.html">Projects</a>
+                <a href="skills.html">Skills</a>
+                <a href="contact.html">Contact</a>
+                <a href="https://github.com/utkarsh9630" target="_blank" rel="noopener">GitHub</a>
+            </div>
+            <span class="footer-copy">© 2026 Utkarsh Tripathi</span>
+        </div>
+    </div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+(function () {
+    /* ── Ladder reveal on scroll ── */
+    const steps = document.querySelectorAll('.lstep');
+    const ladderObs = new IntersectionObserver((entries) => {
+        entries.forEach((entry, _, obs) => {
+            if (entry.isIntersecting) {
+                const el = entry.target;
+                const delay = el.dataset.delay || 0;
+                setTimeout(() => el.classList.add('ladder-visible'), parseInt(delay));
+                ladderObs.unobserve(el);
+            }
+        });
+    }, { threshold: 0.15 });
+
+    steps.forEach((step, i) => {
+        step.dataset.delay = i * 180;
+        ladderObs.observe(step);
+    });
+
+    /* ── Cursor light on ladder cards ── */
+    document.querySelectorAll('.lstep-card').forEach(card => {
+        card.addEventListener('mousemove', e => {
+            const r = card.getBoundingClientRect();
+            card.style.setProperty('--mouse-x', `${((e.clientX - r.left) / r.width) * 100}%`);
+            card.style.setProperty('--mouse-y', `${((e.clientY - r.top) / r.height) * 100}%`);
+        });
+    });
+
+    /* ── Scratch Reveal on scroll ── */
+    const achCards = document.querySelectorAll('.achievement-card');
+
+    const scratchObs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const card = entry.target;
+                if (card.classList.contains('scratched')) return;
+                const delay = parseInt(card.dataset.scratchDelay || 0);
+
+                setTimeout(() => {
+                    // Phase 1: shimmer sweeps
+                    card.classList.add('scratching');
+
+                    // Phase 2: cover wipes away
+                    setTimeout(() => {
+                        card.classList.remove('scratching');
+                        card.classList.add('scratched');
+                    }, 420);
+                }, delay);
+
+                scratchObs.unobserve(card);
+            }
+        });
+    }, { threshold: 0.35 });
+
+    achCards.forEach((card, i) => {
+        card.dataset.scratchDelay = i * 160;
+        scratchObs.observe(card);
+    });
+})();
+</script>
+</body>
+</html>
