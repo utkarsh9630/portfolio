@@ -390,6 +390,43 @@
             color: var(--color-text-tertiary);
         }
 
+        /* ── Checkpoint separators ── */
+        .lstep-checkpoint {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1.2rem 0;
+            opacity: 0;
+        }
+        .lstep-checkpoint.ladder-visible {
+            animation: ladderIn 0.5s cubic-bezier(0.16,1,0.3,1) forwards;
+        }
+        .checkpoint-node {
+            width: 14px; height: 14px;
+            border-radius: 50%;
+            border: 3px solid var(--color-bg-secondary);
+            flex-shrink: 0;
+        }
+        .checkpoint-label {
+            display: flex;
+            align-items: baseline;
+            gap: 0.55rem;
+        }
+        .checkpoint-year {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 800;
+            color: var(--color-text-primary);
+            letter-spacing: -0.01em;
+        }
+        .checkpoint-desc {
+            font-size: 0.7rem;
+            color: var(--color-text-tertiary);
+            letter-spacing: 0.04em;
+        }
+
         /* ── Reveal animations ── */
         .lstep { opacity: 0; }
         .lstep.ladder-visible { animation: ladderIn 0.6s cubic-bezier(0.16,1,0.3,1) forwards; }
@@ -400,6 +437,10 @@
         .lstep-left.ladder-visible  { animation: ladderInLeft 0.6s cubic-bezier(0.16,1,0.3,1) forwards; }
         .lstep-right.ladder-visible { animation: ladderInRight 0.6s cubic-bezier(0.16,1,0.3,1) forwards; }
 
+        @keyframes ladderIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
         @keyframes ladderInCurrent {
             from { opacity:0; transform:scale(0.93) translateY(20px); }
             to   { opacity:1; transform:scale(1) translateY(0); }
@@ -636,6 +677,18 @@
             </div>
 
             <!-- ════════════════════════════════
+                 CHECKPOINT — 2024
+                 SJSU + Internship started
+                 ════════════════════════════════ -->
+            <div class="lstep-checkpoint" data-delay="180">
+                <div class="checkpoint-node" style="background:var(--color-primary);box-shadow:0 0 0 4px rgba(0,168,150,0.18)"></div>
+                <div class="checkpoint-label">
+                    <span class="checkpoint-year">2024</span>
+                    <span class="checkpoint-desc">M.S. begins · Internship</span>
+                </div>
+            </div>
+
+            <!-- ════════════════════════════════
                  RUNG 3 — Concurrent (2024-2026)
                  LEFT (big):  M.S. SJSU
                  RIGHT (small): Retired.com Internship
@@ -651,11 +704,8 @@
                         <span>Generative AI</span><span>LLM Fine-tuning</span><span>Multi-Agent</span><span>RAG Pipelines</span><span>Data Engineering</span>
                     </div>
                 </div>
-                <!-- Node in CENTRE — on mobile this flows below both cards -->
-                <div class="lstep-node" style="grid-column:2; margin-top:1.2rem; order:10;">
-                    <div class="node-circle"></div>
-                    <span class="node-year">2024</span>
-                </div>
+                <!-- Centre spacer (spine passes through) -->
+                <div style="grid-column:2;"></div>
                 <!-- Retired.com — SMALL RIGHT card -->
                 <div class="lstep-card card-past card-compact" style="grid-column:3; margin-left:1rem;">
                     <div class="card-past-badge" style="background:rgba(255,107,53,0.08);border-color:rgba(255,107,53,0.25);color:#ff6b35;">Internship · 6 months</div>
@@ -669,19 +719,27 @@
             </div>
 
             <!-- ════════════════════════════════
-                 RUNG 2 — Cognizant / Sanofi EMEA
-                 RIGHT side (2018-2024)
+                 CHECKPOINT — 2018
+                 B.E. completed AND Cognizant started same year
+                 ════════════════════════════════ -->
+            <div class="lstep-checkpoint" data-delay="360">
+                <div class="checkpoint-node" style="background:var(--color-accent);box-shadow:0 0 0 4px rgba(255,107,53,0.18)"></div>
+                <div class="checkpoint-label">
+                    <span class="checkpoint-year">2018</span>
+                    <span class="checkpoint-desc">B.E. completed · Joined Cognizant</span>
+                </div>
+            </div>
+
+            <!-- ════════════════════════════════
+                 RUNG 2 — Cognizant / Sanofi EMEA (2018-2024)
                  ════════════════════════════════ -->
             <div class="lstep lstep-right">
                 <div style="grid-column:1;"></div>
-                <div class="lstep-node" style="grid-column:2;">
-                    <div class="node-circle" style="background:var(--color-accent);box-shadow:0 0 0 3px rgba(255,107,53,0.18)"></div>
-                    <span class="node-year">2018</span>
-                </div>
+                <div style="grid-column:2;"></div>
                 <div class="lstep-card card-past card-oldest" style="grid-column:3; margin-left:1rem;">
-                    <div class="card-past-badge">6 Years</div>
+                    <div class="card-past-badge">6 Years · 2018 – 2024</div>
                     <h3 class="card-past-title">Analytics & ML Engineer</h3>
-                    <div class="card-past-org">Cognizant · Sanofi Pharma (EMEA) · 2018 – 2024</div>
+                    <div class="card-past-org">Cognizant · Sanofi Pharma (EMEA)</div>
                     <p class="card-past-desc">Started as Data Analyst, grew into Data Engineer. Built regression forecasting (15% MAPE), designed A/B tests that unblocked 50+ pipelines, led KPI definition workshops with Sales leadership across EMEA.</p>
                     <div class="card-past-tags">
                         <span>Snowflake</span><span>A/B Testing</span><span>Power BI</span><span>Python</span><span>dbt</span>
@@ -690,23 +748,31 @@
             </div>
 
             <!-- ════════════════════════════════
-                 BASE — B.E. Electronics Engineering
-                 LEFT side (2014-2018) — Foundation
+                 CHECKPOINT — 2014
+                 The Beginning
+                 ════════════════════════════════ -->
+            <div class="lstep-checkpoint" data-delay="540">
+                <div class="checkpoint-node" style="background:#f59e0b;box-shadow:0 0 0 4px rgba(245,158,11,0.2)"></div>
+                <div class="checkpoint-label">
+                    <span class="checkpoint-year">2014</span>
+                    <span class="checkpoint-desc">B.E. Electronics Engineering begins</span>
+                </div>
+            </div>
+
+            <!-- ════════════════════════════════
+                 BASE — B.E. Electronics Engineering (2014-2018)
                  ════════════════════════════════ -->
             <div class="lstep lstep-left">
                 <div class="lstep-card card-past card-base" style="grid-column:1; margin-right:1rem;">
-                    <div class="card-past-badge">Foundation</div>
+                    <div class="card-past-badge">Foundation · 2014 – 2018</div>
                     <h3 class="card-past-title">B.E. Electronics Engineering</h3>
-                    <div class="card-past-org">University · India · 2014 – 2018</div>
+                    <div class="card-past-org">University · India</div>
                     <p class="card-past-desc">The base of the ladder — core engineering fundamentals in electronics, circuits, signal processing, and programming that built the analytical thinking underlying every system since.</p>
                     <div class="card-past-tags">
                         <span>Electronics</span><span>Signal Processing</span><span>C / C++</span><span>Mathematics</span>
                     </div>
                 </div>
-                <div class="lstep-node" style="grid-column:2;">
-                    <div class="node-circle" style="background:#f59e0b;box-shadow:0 0 0 3px rgba(245,158,11,0.2)"></div>
-                    <span class="node-year">2014</span>
-                </div>
+                <div style="grid-column:2;"></div>
                 <div style="grid-column:3;"></div>
             </div>
 
@@ -798,6 +864,13 @@
     steps.forEach((step, i) => {
         step.dataset.delay = i * 180;
         ladderObs.observe(step);
+    });
+
+    // Also observe checkpoint separators
+    document.querySelectorAll('.lstep-checkpoint').forEach(el => {
+        const delay = el.dataset.delay || 0;
+        ladderObs.observe(el);
+        el.dataset.delay = delay;
     });
 
     /* ── Cursor light on ladder cards ── */
