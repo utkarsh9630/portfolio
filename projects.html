@@ -335,6 +335,27 @@
             color: rgba(0,168,150,0.45);
         }
 
+        /* ── Mobile overrides ── */
+        @media (max-width: 640px) {
+            .proj-item { height: 96px; }
+            .proj-item.open { height: 240px; }
+            /* Drawer covers the full card on mobile */
+            .proj-desc-drawer {
+                left: 0; right: 0; width: 100%;
+                border-left: none;
+                border-top: 1px solid rgba(0,168,150,0.15);
+            }
+            /* Hide overview entirely when open on mobile */
+            .proj-item.open .proj-overview {
+                opacity: 0;
+                pointer-events: none;
+            }
+            .proj-metrics-compact { display: none; }
+            .proj-thumb { width: 68px; height: 56px; }
+            .proj-name { font-size: 0.9rem; }
+            .proj-tech-tag { font-size: 0.64rem; }
+        }
+
         /* ── Section subtitle ── */
         .proj-list-hint {
             font-size: 0.72rem;

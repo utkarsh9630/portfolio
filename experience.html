@@ -536,22 +536,42 @@
 
         /* ── Responsive ── */
         @media (max-width: 768px) {
-            .lstep-left, .lstep-right {
-                grid-template-columns: 1fr 60px 1fr;
-            }
             .card-current { width: 100%; padding: 1.4rem; }
             .card-current-title { font-size: 1.25rem; }
-        }
 
-        @media (max-width: 540px) {
-            .lstep-left, .lstep-right {
-                grid-template-columns: 1fr;
+            /* Collapse all steps to single column */
+            .lstep-left,
+            .lstep-right {
+                grid-template-columns: 1fr !important;
+                padding-bottom: 0.5rem;
             }
-            .lstep-left .lstep-node,
-            .lstep-right .lstep-node { display: none; }
-            .rung-line, .rung-empty { display: none; }
+
+            /* Cards always fill column 1 */
             .lstep-left .lstep-card,
-            .lstep-right .lstep-card { width: 100%; }
+            .lstep-right .lstep-card {
+                grid-column: 1 !important;
+                width: 100% !important;
+                margin: 0 0 0.75rem 0 !important;
+            }
+
+            /* Year node: full-width row after cards (order: 10 on the combined row) */
+            .lstep-node {
+                grid-column: 1 !important;
+                flex-direction: row !important;
+                justify-content: flex-start;
+                gap: 0.5rem;
+                padding: 0.5rem 0 1rem;
+            }
+            .lstep-node .node-year {
+                font-size: 0.7rem;
+                color: var(--color-text-secondary);
+            }
+
+            /* Hide horizontal rung lines & empty fillers */
+            .rung-line, .rung-empty { display: none; }
+
+            /* Spine shifts to left edge on mobile */
+            .ladder-spine { left: 8px; transform: none; }
         }
     </style>
 </head>
@@ -631,17 +651,17 @@
                         <span>Generative AI</span><span>LLM Fine-tuning</span><span>Multi-Agent</span><span>RAG Pipelines</span><span>Data Engineering</span>
                     </div>
                 </div>
-                <!-- Node in CENTRE -->
-                <div class="lstep-node" style="grid-column:2; margin-top:1.2rem;">
+                <!-- Node in CENTRE — on mobile this flows below both cards -->
+                <div class="lstep-node" style="grid-column:2; margin-top:1.2rem; order:10;">
                     <div class="node-circle"></div>
                     <span class="node-year">2024</span>
                 </div>
                 <!-- Retired.com — SMALL RIGHT card -->
                 <div class="lstep-card card-past card-compact" style="grid-column:3; margin-left:1rem;">
-                    <div class="card-past-badge" style="background:rgba(255,107,53,0.08);border-color:rgba(255,107,53,0.25);color:#ff6b35;">Internship</div>
+                    <div class="card-past-badge" style="background:rgba(255,107,53,0.08);border-color:rgba(255,107,53,0.25);color:#ff6b35;">Internship · 6 months</div>
                     <h3 class="card-past-title">AI & Data Engineer Intern</h3>
-                    <div class="card-past-org">Retired.com · Los Angeles · Jun–Dec 2025</div>
-                    <p class="card-past-desc">Concurrent with M.S. studies. Built LLM triage agent (GPT-4o), redesigned Snowflake pipeline saving 200× cost, added schema drift monitoring (−40% downtime).</p>
+                    <div class="card-past-org">Retired.com · Los Angeles · Jun – Dec 2025</div>
+                    <p class="card-past-desc">6-month internship alongside M.S. studies. Built LLM triage agent (GPT-4o), redesigned Snowflake pipeline saving 200× cost, added schema drift monitoring (−40% downtime).</p>
                     <div class="card-past-tags">
                         <span>LLM Agents</span><span>Snowflake</span><span>dbt</span><span>Azure</span>
                     </div>
