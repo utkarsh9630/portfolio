@@ -18,6 +18,8 @@ M.S. Applied Data Intelligence, SJSU — Graduated 2026. 6+ years in data engine
 | **VerdictAI** | Multi-agent fact-checking with Chain-of-Debate. 85%+ cache hit rate, 92% alignment with fact-checkers. | FastAPI, GPT-4o-mini, SQLite |
 | **TicketGuard** | Real-time ticket scam triage using NVIDIA Nemotron via NIM. Built at NVIDIA Hackathon. | Next.js, NVIDIA NIM, Vercel |
 | **Energy Demand Forecasting** | End-to-end pipeline — EIA + OpenMeteo APIs → Airflow → dbt → Snowflake → Power BI. | Airflow, dbt, Snowflake |
+| **SnapFix** | Autonomous 9-node multi-agent Slack code review system. Screenshot an error → Chain-of-Debate diagnosis → CWE/OWASP-validated fix → sandbox verify → compliance report. 3 human approval gates. Built at Harness Engineering Hack SF 2025. | FastAPI, Guild.ai, React, ClickHouse |
+| **SafeAgent** | Constitutional agent builder scaffolding multi-agent systems from plain English. Every tool call passes a 3-tier safety gate (deterministic guardrails → semantic Redis cache → Claude scoring) with auto-fix on WARN. Built at UC Berkeley AI Hackathon 2026. | LangGraph, Claude API, Redis, React Flow |
 
 ---
 
